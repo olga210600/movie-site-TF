@@ -1,0 +1,100 @@
+import * as url from "url";
+import { v4 as uuidv4 } from 'uuid';
+// import {IMovie} from "./reducers/moviesReducer";
+
+
+export const defaultData = [
+    {
+        id: uuidv4,
+        image:  'https://kinogo.biz/uploads/mini/minifull/988/1660325341-770173280.webp',
+        name: 'Day shift (2022)',
+        year: 2022,
+        genre: 'action movie',
+        description: 'Starring Bud. He has a daughter and a wife. But my relationship with my wife has not been very good lately. He earns very little and is constantly late. They live separately and in a word he is not responsible. The wife does not have money to support a house in Los Angeles, so she decides to take her daughter and move back to Florida. But this is a low blow for Bud. He cannot allow this. After all, then he would not see his daughter so often. And this is his greatest love. He\'s not a great dad though. He urgently needs to find money to allow his wife to stay in his city. He gets a job cleaning pools. But it\'s just a cover job from his wife and daughter. In fact, he catches vampires and takes out fangs. For this he receives money. But there are many singles like him. And there are not so many options to earn such options. He decides to ask for a last chance at the union where he worked before. But he was kicked out due to a violation. The authorities believe him and give him this chance. In the union, the salary for killing vampires is much higher. He is given a guy who is afraid of vampires and does not know how to kill at all. But he knows very well where vampires can hide and how to recognize them. Together they make the perfect duet. One is very smart, the other is very strong',
+        video: 'https://www.youtube.com/embed/7ulJciotFRY',
+        director: 'J.J. Perry'
+    },
+    {
+        id: uuidv4,
+        image:  'https://kinogo.biz/uploads/mini/minifull/ea2/1585484421-438574572.webp',
+        name: 'Dragon\'s Honor (2005)',
+        year: 2005,
+        genre: 'action movie',
+        description: 'The plot is based on the story of how dealers stole an elephant and a baby elephant from a peasant family from Thailand, which were then illegally transported to Sydney. A young guy goes to Australia, where he enters into a fight with a crime syndicate.',
+        video: 'https://www.youtube.com/embed/jjlV5t9zS1Q',
+        director: 'Prachya Pinkayu',
+    }, {
+        id: uuidv4,
+        image: 'https://kinogo.biz/uploads/mini/minifull/d14/1616532402-678343561.webp',
+        name: '2022: Tsunami (2009)',
+        year: 2009,
+        genre: 'action movie',
+        description: '2022 A serious problem arose before the population of the Earth - the revelry of the elements. A wave of natural disasters sweeps across the planet: earthquakes, hurricanes, volcanic eruptions and snow storms. In Thailand, scientists from the National Center for Disaster Prevention, monitoring seismic conditions, discover two underwater volcanoes off their coasts and predict a giant tsunami that will sweep across the Gulf of Thailand. The Prime Minister announced the evacuation of the population several times, but nothing happened. But one day the forecast of scientists began to come true ...',
+        video:'https://www.youtube.com/embed/4vAqGGoJr80',
+        director: 'Toranong Srichua',
+    }, {
+        id: uuidv4,
+        image: 'https://kinogo.biz/uploads/mini/minifull/eec/1659980582-1100283655.webp',
+        name: 'Killer: The Girl Must Die (2022)',
+        year: 2022,
+        genre: 'action movie',
+        description: 'According to the narration of the film, the main character, whose name is Pan Eui Gang, led a criminal life in his past, was a killer and killed people on orders and for a certain amount of money. He was considered a true professional in his field. But time passed and the guy began to think about his future, he realized that he could not continue like this and no longer wanted to be a killer in the future. At one point, he completed his professional career. Now he is an ordinary, average man, he began to lead a calm and measured life. After that, he took a life partner and got married, they live in perfect harmony, and the main character can be called an exemplary family man. Pan\'s wife decided to take a vacation with her friend. She is accompanied by her friend. This friend has a daughter, her name is Yoon Jin. She is a beautiful and sweet girl of seventeen, but she is very naive and trusting, so Pan was asked to look after her. It all started well, but one day the criminals kidnapped the girl. It is not clear who they wanted to harm and annoy with this act. The main character must try and return the girl home by any means, and her kidnappers must also answer according to their deserts.',
+        video: 'https://www.youtube.com/embed/1zeqZ7m6UnU',
+        director: 'Choi Jae-hoon',
+    }, {
+        id: uuidv4,
+        image:  'https://kinogo.biz/uploads/mini/minifull/0ae/1659637333-368161235.webp',
+        name: 'Faster than a bullet (2022)',
+        year: 2022,
+        genre: 'action movie',
+        description: 'What would happen if all of a sudden five of America\'s best hitmen were in the same train car? None of them yet suspects that "colleagues" are in close proximity. They are not connected by anything other than a common profession, each is used to working alone, while abandoning family, a normal career and friends. Their way of life, constant moving and much more left an indelible imprint on the psyche. Cruelty, heartlessness and detachment are the only feelings they can experience. All five had to forget the past life, give up the future and live in constant fear of being jailed for life. They still do not even suspect that the upcoming tasks are related. How can you find a common language without betraying yourself with giblets, because revealing your identity threatens with a complete failure of the operation. What happens when the best professional killers meet during a mission? Will they be able to continue to hide their identities or will they give away the main secret and go for broke? Who is behind all this confusion? And who would benefit from bringing face to face the most dangerous people in the country? Will they start working together for the common good, or will they remain every man for himself in search of personal gain?',
+        video: 'https://www.youtube.com/embed/0IOsk2Vlc4o',
+        director: 'David Leitch',
+    }, {
+        id: uuidv4,
+        image:  'https://kinogo.biz/uploads/mini/minifull/d8d/1585414073-699527350.webp',
+        name: 'Soul of the company (2018)',
+        year: 2018,
+        genre: 'comedy',
+        description: 'After an unexpected divorce, housewife Diana decides to restart her new life and demands college. She corresponds to the same stream with her own daughter, who is not at all happy about the appearance of a turn of events. But Diana is unstoppable. With open arms, she accepts the crazy student life.',
+        video: 'https://www.youtube.com/embed/SCwIVTO60Co',
+        director: 'Ben Falcone',
+    }, {
+        id: uuidv4,
+        image:  'https://kinogo.biz/uploads/mini/minifull/5c2/1630433931-1057387804.webp',
+        name: 'He\'s all that (2021)',
+        year: 2021,
+        genre: 'comedy',
+        description: 'Padgett Sawyer is a "makeover" social media influencer who believes her makeup tutorials add value to people\'s lives. Following this myth, she regularly posts photos and videos to help her followers. While in college, Padgett dates famous singer/dancer Jordan Van Draanen. Their relationship flourishes until Jordan cheats on Padgett with a fellow dancer. The fight between Jordan and Padgett is recorded live on Padgett\'s profile by her buddy Alden. The viral video makes Padgett the subject of memes, depriving her of her ideal image and sponsorship. To get revenge on Jordan, Padgett accepts Alden\'s challenge. She bets on another college guy\'s makeover and makes him prom king. For her sinister revenge, she chooses the most unpopular and cynical boy in school, Cameron Queller, who hides everything under his cap. Padgett approaches Cameron and persuades him to go with her to Alden\'s birthday party, but on one condition. Padgett gets to give Cameron a head-to-toe makeover. When the new couple arrives at Alden\'s party, everyone is mesmerized by Cameron Queller in a downright sexy look. But Alden is not ready to lose the bet and prepares her attacks to overthrow Padgett.',
+        video:'https://www.youtube.com/embed/XqTPaRz8Nx8',
+        director: 'Mark Waters',
+    }, {
+        id: uuidv4,
+        image:  'https://kinogo.biz/uploads/mini/minifull/b4e/1585697447-510374421.webp',
+        name: 'Classmates (2010)',
+        year: 2010,
+        genre: 'comedy',
+        description: 'Maturity is not so much a moment in life as it is a state of mind that can change faster than a 13-year-old\'s Facebook status. Case in point: Lenny Feder. Lenny and his four childhood best friends -- former teammates on the championship basketball team -- are technically grown up. They have driver\'s licenses, mortgages and thinning hair. Some have jobs. Most have families. All have their own paths. But when their old coach dies and the flabby five reunite to scatter his ashes in the wind, they find they can go in and out of childhood like well-worn jeans. So they swap their cell phones for cup phones, rat races for water slides, and teach their kids that there\'s more to life than a high score in a video game for the weekend. In the process, they learn some valuable lessons themselves: their wives are very smart, their children are very wonderful, and the game called "arrow roulette" is pretty silly. Of course, they also pee in swimming pools, peep on their friends\' daughters, and endlessly tear each other up. You wouldn\'t expect Adam Sandler to grow up in one go, would you? The movie "Growing Up" is replete with behavior that real adults are better off avoiding. Nevertheless, the film has more heart than one would expect. When five friends arrive at a funeral, their lives are in various states of disarray. Lenny, a successful Hollywood agent, finds his children turning into pampered freaks, unable to drink water unless it is brought from Norway, or tear themselves away from violent video games.',
+        video: 'https://www.youtube.com/embed/oUFrjl5rgtw',
+        director: 'Dennis Dugan',
+    }, {
+        id: uuidv4,
+        image:  'https://kinogo.biz/uploads/mini/minifull/3d2/1585500457-440830923.webp',
+        name: 'The Third Extra (2012)',
+        year: 2012,
+        genre: 'comedy',
+        description: 'John Bennett has a problem. Probably more than one. I mean, he\'s a 35-year-old chronic loser who chronically smokes too much and hates his job selling rental cars. But there\'s only one problem bothering him right now. His roommate Lori wants John to ask his best friend Ted to move out. And John can\'t bring himself to do it. I mean, come on: he and Ted have been best buddies probably always. Back when he was a 10-year-old kid with no friends, John made a Christmas wish and Ted came alive. Who is Ted, you might ask? Ted is a teddy bear - a living, breathing stuffed animal. Naturally, Ted and John promised to be best friends for life. And they were serious about it. On the other hand, maybe Laurie is right. Ted sometimes steers John in the wrong direction. Drinking. Parties. Pranks. That time when Ted brought in prostitutes and one of them defecated in the corner. Not everyone has that kind of shared history. But Lori is a special girl. She and John have been dating for four years. She\'s beautiful, patient, loving, kind, and also a good athlete. Okay, she\'s a little crazy about the hooker story, but still. And now it looks like John has a choice to make: Fluffy\'s best friend or the girl he loves. What\'s a guy to do?',
+        video: 'https://www.youtube.com/embed/KxqzrYsZMys',
+        director: ' Seth MacFarlane',
+    }, {
+        id: uuidv4,
+        image: 'https://kinogo.biz/uploads/mini/minifull/d3b/1639392612-464195835.webp',
+        name: 'My Favorite Enemy (2021)',
+        year: 2021,
+        genre: 'comedy',
+        description: 'Impulsive and narcissistic Lucy Hutton works for a big company. She has the worst luck with her coworkers, especially the calculating Joshua Templeman, whom she hates with all her soul. She is even more unlucky to have him sitting across from her. Lucy is forced to see his face all day at work. They are both up for promotion, and because of this their rivalry and hatred for each other grows by the day. All day long, they have to serve their bosses in order to make their dreams come true. Trying to outmaneuver and destroy each other, this duel turns into a real ruthless battle of wits, but one random incident changes everything. One day in the course of their rivalry, they accidentally succumb to an attraction, a place and time that changes the rules and all of the above upside down. After all, a kiss that suddenly happens can turn both the girl\'s life and the guy\'s life upside down. How will these two behave next and who will win in this great battle?',
+        video: 'https://www.youtube.com/embed/nYkSrlR0a44',
+        director: 'Peter Hutchings',
+    },
+
+]
