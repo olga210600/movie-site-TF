@@ -6,6 +6,21 @@ import RouterNavigation from "../components/RouterNavigation";
 import FilmPage from "../components/FilmPage";
 import Registration from "../components/pages/Registration";
 
+const mockedOptions = {
+    roles: [
+        { value: "admin", label: "Admin role" },
+        { value: "user", label: "User role" },
+    ],
+};
+
+const mockedData = {
+    userName: "",
+    role: "user",
+    email: "my-email@example.com",
+    password: "",
+
+};
+
 
 const withNavigation = (Component, data = {}, options = {}) => {
     return (
@@ -23,7 +38,7 @@ const PublicRoutes = () => {
             <Routes>
                 <Route exact path="/" element={withNavigation(Main)} />
                 <Route path="/movie-details" element={withNavigation(FilmPage)} />
-                <Route path="/registration-form" element={withNavigation(Registration)} />
+                <Route path="/registration-form" element={withNavigation(Registration, mockedData, mockedOptions)} />
 
 
 
