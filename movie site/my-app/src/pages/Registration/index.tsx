@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Formik, Field, Form } from "formik";
-import { validateSchema } from "./schema";
+import React, {useState} from "react";
+import {Formik, Field, Form} from "formik";
+import {validateSchema} from "./schema";
 import {
     Wrapper,
     FormField,
@@ -11,16 +11,21 @@ import {
 import {IMovie} from "../../store/reducers/moviesReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {userLogIn, adminLogIn} from "../../store/reducers/moviesReducer"
+import {Link, PATHS} from '../../components/RouterNavigation'
+import {createBrowserHistory} from "history";
 
 
 const EssentialForm = () => {
     // const [isShowValues, setIsShowValues] = useState(false);
+    const history = createBrowserHistory();
+
+    const currentPage = history.location.pathname;
     const isUser: IMovie[] = useSelector((state: any) => state.moviesList.isUser)
     const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
     const dispatch = useDispatch()
 
-    console.log('isUser' ,isUser)
-    console.log('isAdmin' ,isAdmin)
+    console.log('isUser', isUser)
+    console.log('isAdmin', isAdmin)
 
     // const changeUserStatus = (item) => {
     //     item = true
@@ -36,11 +41,12 @@ const EssentialForm = () => {
                     email: "",
                     password: "",
                 }}
-                onSubmit={() => {}}
+                onSubmit={() => {
+                }}
                 validationSchema={validateSchema}
                 validateOnMount
             >
-                {({ values, errors }) => {
+                {({values, errors}) => {
                     console.log("errors: ", errors);
                     return (
                         <Form>
@@ -48,7 +54,7 @@ const EssentialForm = () => {
 
                             <FormField isError={errors?.userName}>
                                 <label htmlFor="userName">First Name</label>
-                                <Field id="userName" name="userName" placeholder="Name" />
+                                <Field id="userName" name="userName" placeholder="Name"/>
 
                                 {errors?.userName && (
                                     <ErrorMessage>{errors?.userName}</ErrorMessage>
@@ -70,45 +76,69 @@ const EssentialForm = () => {
 
                             <FormField isError={errors?.password}>
                                 <label htmlFor="password"> Password</label>
-                                <Field id="password" name="password" placeholder="123" />
+                                <Field id="password" name="password" placeholder="123"/>
 
                                 {errors?.password && (
                                     <ErrorMessage>{errors?.password}</ErrorMessage>
                                 )}
                             </FormField>
 
-                            <SubmitButton
-                                disabled={
-                                    errors?.userName  || errors?.email || errors?.password
-                                }
-                                onClick={() => dispatch(adminLogIn(isAdmin)) }
 
-                            >
-                                Log like admin
-                            </SubmitButton>
+                            {/*<Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}>*/}
+                            {/*    Main page*/}
+                            {/*</Link>*/}
 
-                            <SubmitButton
-                                disabled={
-                                    errors?.userName  || errors?.email || errors?.password
-                                }
-                                    onClick={() => dispatch(userLogIn(isUser)) }
-                            >
-                                Create new user
-                            </SubmitButton>
 
-                            {/*{isShowValues && (*/}
-                            {/*    // <CodeWrapper>*/}
-                            {/*    //     {Object.entries(values).map(([key, value]) => (*/}
-                            {/*    //         <span>{`${key}: ${value}`}</span>*/}
-                            {/*    //     ))}*/}
-                            {/*    // </CodeWrapper>*/}
-                            {/*)}*/}
+                            {
+                                errors?.userName || errors?.email || errors?.password ?
+                                    <div>Add Info</div> :
+
+                                    <div>
+                                        <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}
+                                              onClick={() => dispatch(adminLogIn(isAdmin))}
+                                        >
+                                            Log like admin
+                                        </Link>
+
+                                        <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}
+                                              onClick={() => dispatch(userLogIn(isUser))}
+                                        >
+                                            Create new user
+                                        </Link>
+                                    </div>
+
+                            }
+
+
+                            {/*<SubmitButton*/}
+                            {/*    disabled={*/}
+                            {/*        errors?.userName || errors?.email || errors?.password*/}
+                            {/*    }*/}
+                            {/*    onClick={() => dispatch(userLogIn(isUser))}*/}
+
+                            {/*>*/}
+                            {/*    Create new user*/}
+                            {/*</SubmitButton>*/}
+
+                            {/*<SubmitButton*/}
+                            {/*    disabled={*/}
+                            {/*        errors?.userName || errors?.email || errors?.password*/}
+                            {/*    }*/}
+                            {/*    onClick={() => dispatch(adminLogIn(isAdmin))}*/}
+
+                            {/*>*/}
+                            {/*    Log like admin*/}
+                            {/*</SubmitButton>*/}
+
+                            {/* <button onClick={() => history.push("https://www.google.com/")}>
+        Some route
+      </button> */}
                         </Form>
                     );
                 }}
-            </Formik>
-        </Wrapper>
-    );
-};
+                    </Formik>
+                    </Wrapper>
+                    );
+                };
 
 export default EssentialForm;

@@ -49,7 +49,16 @@ const moviesSlice = createSlice({
             // console.log('action: ', action)
             return{
                 ...state,
-                isAdmin: true
+                isAdmin: true,
+
+            }
+        },
+        logOut(state, action) {
+            // console.log('action: ', action)
+            return{
+                ...state,
+                isAdmin: false,
+                isUser: false
             }
         }
     }
@@ -64,30 +73,13 @@ export function getFilteredList(selectedCategory, movieList) {
     return movieList.filter((item) => item.genre === selectedCategory);
 }
 
+// export function goOnMainPage() {
+//     history.("https://www.google.com/")
+//   }
 
-// const [movieList, setMovieList] = useState([]);
-// const [selectedCategory, setSelectedCategory] = useState();
-//
-// useEffect(() => {
-//     setMovieList(movies);
-// }, []);
-//
-// function getFilteredList() {
-//
-//     if (!selectedCategory) {
-//         return movieList;
-//     }
-//     return movieList.filter((item) => item.genre === selectedCategory);
-// }
-//
-// let filteredList = useMemo(getFilteredList, [selectedCategory, movieList]);
-//
-// function handleCategoryChange(event) {
-//     setSelectedCategory(event.target.value);
-// }
 
 
 export const getMovies = (state: { moviesList: IMovie[] }) => state.moviesList;
 export const moviesReducer = moviesSlice.reducer;
-export const {selectedFilms, userLogIn, adminLogIn} = moviesSlice.actions
+export const {selectedFilms, userLogIn, adminLogIn, logOut} = moviesSlice.actions
 
