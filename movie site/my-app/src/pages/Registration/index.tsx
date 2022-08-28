@@ -8,9 +8,24 @@ import {
     CodeWrapper,
     ErrorMessage,
 } from "./styles";
+import {IMovie} from "../../store/reducers/moviesReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {userLogIn, adminLogIn} from "../../store/reducers/moviesReducer"
+
 
 const EssentialForm = () => {
     // const [isShowValues, setIsShowValues] = useState(false);
+    const isUser: IMovie[] = useSelector((state: any) => state.moviesList.isUser)
+    const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
+    const dispatch = useDispatch()
+
+    console.log('isUser' ,isUser)
+    console.log('isAdmin' ,isAdmin)
+
+    // const changeUserStatus = (item) => {
+    //     item = true
+    //     console.log('item',item)
+    // }
 
     return (
         <Wrapper>
@@ -64,11 +79,21 @@ const EssentialForm = () => {
 
                             <SubmitButton
                                 disabled={
-                                    errors?.userName  || errors?.email
+                                    errors?.userName  || errors?.email || errors?.password
                                 }
-                                // onClick={() => setIsShowValues((prevState) => !prevState)}
+                                onClick={() => dispatch(adminLogIn(isAdmin)) }
+
                             >
-                                Submit
+                                Log like admin
+                            </SubmitButton>
+
+                            <SubmitButton
+                                disabled={
+                                    errors?.userName  || errors?.email || errors?.password
+                                }
+                                    onClick={() => dispatch(userLogIn(isUser)) }
+                            >
+                                Create new user
                             </SubmitButton>
 
                             {/*{isShowValues && (*/}

@@ -1,14 +1,14 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {IMovie} from "../../../store/reducers/moviesReducer";
+import {IMovie} from "../../store/reducers/moviesReducer";
 import React, {useEffect, useMemo, useState} from "react";
 // import '../components.css'
 import PaginationList from 'react-pagination-list';
 
 import styled from 'styled-components'
-import PageHeader from "../../PageHeader";
-import {selectedFilms} from '../../../store/reducers/moviesReducer'
-import ImageSlider from "../../ImageSlider";
-import Post from "../../Post";
+import PageHeader from "../../components/PageHeader";
+import {selectedFilms} from '../../store/reducers/moviesReducer'
+import ImageSlider from "../../components/ImageSlider";
+import Post from "../../components/Post";
 
 
 const Wrapper = styled.div`

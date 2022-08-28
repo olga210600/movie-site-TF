@@ -23,7 +23,9 @@ export interface IMovie {
 const moviesSlice = createSlice({
     initialState: {
         defaultData,
-        filteredMovies: defaultData
+        filteredMovies: defaultData,
+        isAdmin: false,
+        isUser: false,
     },
     name: 'moviesList',
     reducers: {
@@ -35,6 +37,20 @@ const moviesSlice = createSlice({
             }
             // return state.filteredMovies = getFilteredList(action.payload, state.defaultData)
 
+        },
+        userLogIn(state, action) {
+            // console.log('action: ', action)
+            return{
+                ...state,
+                isUser: true
+            }
+        },
+        adminLogIn(state, action) {
+            // console.log('action: ', action)
+            return{
+                ...state,
+                isAdmin: true
+            }
         }
     }
 })
@@ -73,5 +89,5 @@ export function getFilteredList(selectedCategory, movieList) {
 
 export const getMovies = (state: { moviesList: IMovie[] }) => state.moviesList;
 export const moviesReducer = moviesSlice.reducer;
-export const {selectedFilms} = moviesSlice.actions
+export const {selectedFilms, userLogIn, adminLogIn} = moviesSlice.actions
 

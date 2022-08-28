@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import SimpleForm from "../components/pages/SimpleForm";
 // import EssentialForm from "../components/pages/EssentialForm";
-import Main from "../components/pages/Main";
+import Main from "../pages/Main";
 import RouterNavigation from "../components/RouterNavigation";
 import FilmPage from "../components/FilmPage";
-import Registration from "../components/pages/Registration";
+import Registration from "../pages/Registration";
 
 const mockedOptions = {
     roles: [
