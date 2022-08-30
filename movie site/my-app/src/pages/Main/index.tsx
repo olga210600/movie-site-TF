@@ -31,6 +31,8 @@ const Main = () => {
     const movies: IMovie[] = useSelector((state: any) => state.moviesList.defaultData)
     const filteredList: IMovie[] = useSelector((state: any) => state.moviesList.filteredMovies)
 
+    console.log('movies',movies)
+
     const dispatch = useDispatch()
 
     function handleCategoryChange(event) {

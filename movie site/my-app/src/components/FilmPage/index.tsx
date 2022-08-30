@@ -27,6 +27,7 @@ const FilmPage = (props) => {
                             return (
                                 <div>
 
+
                                     <FilmPageInfo movie={movie}/>
 
                                 </div>

@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import {IMovie} from "../../store/reducers/moviesReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {removeMovie} from '../../store/reducers/moviesReducer'
 
 
 const PostWrapper = styled.div`
@@ -22,17 +25,44 @@ const MovieName = styled.p`
 
 //
 const Post = ({movie, filmId}:any) => {
+    const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
+    const dispatch = useDispatch()
+
     return (
-        <Link to={{
-            pathname:`/movie-details?filmId=${filmId}`,
+        // <PostWrapper>
+        //     {isAdmin ?
+        //         <div>
+        //             <button onClick={() => dispatch(removeMovie(movie.id))}>x</button>
+        //             <button>Change</button>
+        //         </div> :
+        //         <div></div>
+        //
+        //     }
+        //     <MovieName>{movie.name}</MovieName>
+        //     <img className='movie-img' src={movie.image}/>
+        // </PostWrapper>
+        <div>
+            {isAdmin ?
+                <div>
+                    <button onClick={() => dispatch(removeMovie(movie.id))}>x</button>
+                    <button>Change</button>
+                </div> :
+                <div></div>
+
+            }
+            <Link to={{
+                pathname:`/movie-details?filmId=${filmId}`,
 
 
-        }}>
-            <PostWrapper>
-                <MovieName>{movie.name}</MovieName>
-                <img className='movie-img' src={movie.image}/>
-            </PostWrapper>
-        </Link>
+            }}>
+                <PostWrapper>
+
+                    <MovieName>{movie.name}</MovieName>
+                    <img className='movie-img' src={movie.image}/>
+                </PostWrapper>
+            </Link>
+
+        </div>
 
     );
 };
