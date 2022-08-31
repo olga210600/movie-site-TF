@@ -1,33 +1,52 @@
 import React from "react";
-import { createBrowserHistory } from "history";
+import {createBrowserHistory} from "history";
 import styled from "styled-components";
-import { Link as RouterLink } from "react-router-dom";
+import {Link as RouterLink} from "react-router-dom";
 import {Form} from "formik";
 import {IMovie} from "../../store/reducers/moviesReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {logOut} from '../../store/reducers/moviesReducer'
 
 
-
 export const Wrapper = styled.div`
   height: 60px;
-  background-color: #33ceff;
-  border-radius: 12px;
-  margin-bottom: 20px;
+  width: 100%;
+  background: white;
+  margin: 0;
+  font-size: 17px;
 
-  & nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 20px;
-  }
-`;
+
+& nav {
+  display: flex;
+  padding-top: 20px;
+  justify-content: space-between;
+}
+`
+
+export const LinkWrapper = styled.div`
+  display: flex;
+`
+
+export const SelectWrapper = styled.div`
+  display: flex;
+`
+
+export const RegistrationWrapper = styled.div`
+  margin-right: 30px;
+`
+
+export const MovieCategory = styled.div`
+  //
+  //
+`
 
 export const Link = styled(RouterLink)`
   && {
-    color: ${({ isActive }) => (isActive ? "#000000" : "black")};
+    color: ${({isActive}) => (isActive ? "#000000" : "black")};
     text-decoration: none;
-    font-size: 18px;
+    //font-size: 18px;
+    width: 100px;
+    margin: 0 20px 0 30px;
   }
 `;
 
@@ -35,7 +54,7 @@ export const Link = styled(RouterLink)`
 export const PATHS = {
     MAIN: "/",
 
-REGISTRATION_FORM: "/registration-form",
+    REGISTRATION_FORM: "/registration-form",
     //////////////////////////////////
     // SIMPLE_FORM: "/simple-form",
     // ESSENTIAL_FORM: "/essential-form",
@@ -44,10 +63,10 @@ REGISTRATION_FORM: "/registration-form",
     // Registration_FORM: "/advanced-form",
 };
 
-const Navigation = () => {
+const Navigation = ({handleCategoryChange}: any) => {
     const history = createBrowserHistory();
 
-  const currentPage = history.location.pathname;
+    const currentPage = history.location.pathname;
 
     const state: IMovie[] = useSelector((state: any) => state.moviesList)
     const isUser: IMovie[] = useSelector((state: any) => state.moviesList.isUser)
@@ -57,26 +76,48 @@ const Navigation = () => {
     return (
         <Wrapper>
             <nav>
-                <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}>
-                    Main page
-                </Link>
+
+                    <LinkWrapper>
+                        <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}>
+                            Main page
+                        </Link>
 
 
+                        <SelectWrapper>
+                            <MovieCategory>Filter by Category:</MovieCategory>
+                            <div>
+                                <select
+                                    name="category-list"
+                                    id="category-list"
+                                    onChange={handleCategoryChange}
+                                >
+                                    <option value="">All genres</option>
+                                    <option value="action movie">Action movie</option>
+                                    <option value="comedy">Comedy</option>
+                                </select>
+                            </div>
+                        </SelectWrapper>
+                    </LinkWrapper>
 
 
-                {!isAdmin && !isUser ?
-                    <Link
-                        isActive={currentPage === PATHS.REGISTRATION_FORM}
-                        to={PATHS.REGISTRATION_FORM}
-                    >
-                        Log in
-                    </Link>
-                    :
-                    <div onClick={() => dispatch(logOut(state))}>Log out</div>
-                }
+                    <RegistrationWrapper>
+                        {!isAdmin && !isUser ?
+                            <Link
+                                isActive={currentPage === PATHS.REGISTRATION_FORM}
+                                to={PATHS.REGISTRATION_FORM}
+                            >
+                                Log in
+                            </Link>
+                            :
+                            <LinkWrapper onClick={() => dispatch(logOut(state))}>
+                                Log out
+                            </LinkWrapper>
+                        }
+                    </RegistrationWrapper>
+
+
 
             </nav>
-
             {/* <button onClick={() => history.push("https://www.google.com/")}>
         Some route
       </button> */}

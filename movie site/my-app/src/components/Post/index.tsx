@@ -9,17 +9,41 @@ import {removeMovie} from '../../store/reducers/moviesReducer'
 const PostWrapper = styled.div`
    width: 200px;
     height: 350px;
-    // background: #d9b3b3;
-  
+  margin: 20px;
+  cursor: pointer;
 `
+
 
 const MovieName = styled.p`
   color: #b8b6b6;
   height: 50px;
-  //width: 40px;
-  font-size: 19px;
+  font-size: 18px;
   text-align: center;
   font-weight: bold;
+  //text-decoration: none;
+  cursor: pointer;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  align-items: center;
+  display: flex;
+  
+
+ 
+  
+  
+
+`
+const MovieImgWrapper = styled.div`
+ width: 200px;
+  height: 300px;
+  cursor: pointer;
+
+`
+const MovieImg = styled.img`
+ width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
 
 `
 
@@ -42,23 +66,22 @@ const Post = ({movie, filmId}:any) => {
         //     <img className='movie-img' src={movie.image}/>
         // </PostWrapper>
         <div>
-            {isAdmin ?
+            {isAdmin &&
                 <div>
                     <button onClick={() => dispatch(removeMovie(movie.id))}>x</button>
+                    {/*<button onClick={() => (console.log('movie.id',movie.id))}>x</button>*/}
                     <button>Change</button>
-                </div> :
-                <div></div>
+                </div>
 
             }
-            <Link to={{
-                pathname:`/movie-details?filmId=${filmId}`,
-
-
-            }}>
+            <Link to={{pathname:`/movie-details?filmId=${filmId}`}}>
                 <PostWrapper>
 
                     <MovieName>{movie.name}</MovieName>
-                    <img className='movie-img' src={movie.image}/>
+                    <MovieImgWrapper>
+                        <MovieImg className='movie-img' src={movie.image}/>
+                    </MovieImgWrapper>
+
                 </PostWrapper>
             </Link>
 

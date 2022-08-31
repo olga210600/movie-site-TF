@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, current} from '@reduxjs/toolkit';
 import {defaultData} from "../defaultData";
 
 
@@ -22,7 +22,8 @@ export interface IMovie {
 
 const moviesSlice = createSlice({
     initialState: {
-        defaultData,
+        // defaultData,
+        defaultData: defaultData,
         filteredMovies: defaultData,
         isAdmin: false,
         isAuthorized: false,
@@ -52,7 +53,6 @@ const moviesSlice = createSlice({
             }
         },
         logOut(state, action) {
-            // console.log('action: ', action)
             return {
                 ...state,
                 isAdmin: false,
@@ -60,15 +60,17 @@ const moviesSlice = createSlice({
             }
         },
         removeMovie(state, action) {
-            console.log(88888888888888888888)
-            console.log('state.filteredMovies',state.filteredMovies)
-            const clonedDefaultData = state.filteredMovies
-            // const clonedDefaultData = state.defaultData.filter(movie => movie.id !== action.payload)
-            console.log('clonedDefaultData: ', clonedDefaultData)
-            // return {
-            //     ...state,
-            //     defaultData: clonedDefaultData
-            // }
+            console.log('state.filteredMovies',current( state.filteredMovies))
+            // state.filteredMovies = state.filteredMovies.filter(movie => movie.id !== action.payload)
+            const clonedDefaultData = state.defaultData.filter(movie => movie.id !== action.payload)
+            const clonedFilteredMovies = state.filteredMovies.filter(movie => movie.id !== action.payload)
+            console.log('state.delate',state.filteredMovies)
+
+            return {
+                ...state,
+                defaultData: clonedDefaultData,
+                filteredMovies: clonedFilteredMovies,
+            }
         }
         // removeMovie(state, action) {
         //     return [

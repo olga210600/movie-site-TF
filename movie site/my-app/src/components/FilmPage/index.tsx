@@ -4,6 +4,14 @@ import {IMovie} from "../../store/reducers/moviesReducer";
 import {useSelector} from "react-redux";
 import FilmPageInfo from "../FilmPageInfo";
 import Navigation from "../PageHeader";
+import styled from 'styled-components'
+
+const PageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //width: 100%;
+`
 
 const FilmPage = (props) => {
     console.log(props)
@@ -25,12 +33,12 @@ const FilmPage = (props) => {
                         if (movie.name === name) {
 
                             return (
-                                <div>
+                                <PageWrapper>
 
 
                                     <FilmPageInfo movie={movie}/>
 
-                                </div>
+                                </PageWrapper>
 
 
                             )

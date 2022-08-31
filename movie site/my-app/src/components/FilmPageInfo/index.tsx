@@ -4,13 +4,17 @@ import Navigation from "../RouterNavigation";
 
 
 const PageWrapper = styled.div`
-  width: 700px;
+  width: 63%;
+  min-width: 750px;
   height: 100%;
   background: #2b2a2a;
   margin: 70px 0 70px 0;
-  
   font-family: sans-serif;
   padding-bottom: 20px;
+  justify-content: center;
+  //background: orange;
+
+  
 
 `
 
@@ -27,8 +31,20 @@ const FilmInfo = styled.div`
 `
 
 const ImageWrapper = styled.div`
-  //width: 200px;
+  width: 450px;
+  height: 400px;
   margin: 40px;
+  object-fit: cover;
+  
+
+
+`
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  
+  
+
 
 `
 
@@ -75,7 +91,7 @@ const MovieVideo = styled.div`
 
 
 const NavigationWrapper = styled.div`
-  width: 100%;
+  //width: 100%;
   height: 50px;
   background: white;
   display: flex;
@@ -98,7 +114,7 @@ const FilmPageInfo = ({movie}) => {
 
             <FilmInfoWrapper>
                 <ImageWrapper>
-                    <img src={movie.image}/>
+                    <Image src={movie.image}/>
                 </ImageWrapper>
 
 

@@ -13,14 +13,16 @@ import Post from "../../components/Post";
 
 const Wrapper = styled.div`
   width: 63%;
-  min-width: 600px;
+  min-width: 750px;
   margin: 70px auto;
   background: #2b2a2a;
+  box-sizing: border-box;
+  //padding-top: 0;
 
   & div {
     & div {
       flex-wrap: wrap;
-      margin: 20px;
+      // срабатівает в навигации margin: 20px;
       justify-content: center;
     }
   }
@@ -30,16 +32,12 @@ const Wrapper = styled.div`
 const Main = () => {
     const movies: IMovie[] = useSelector((state: any) => state.moviesList.defaultData)
     const filteredList: IMovie[] = useSelector((state: any) => state.moviesList.filteredMovies)
-
-    console.log('movies',movies)
-
     const dispatch = useDispatch()
 
     function handleCategoryChange(event) {
         dispatch(selectedFilms( event.target.value))
 
     }
-
 
     return (
         <Wrapper>
@@ -52,19 +50,9 @@ const Main = () => {
                 pageSize={9}
                 layout={"row"}
                 renderItem={(item, key) => (
-                    // <Post filmId={item.id} key={key} movie={item}/>
                     <Post filmId={item.name} key={key} movie={item}/>
                 )}
             />
-            {/*<PaginationList*/}
-            {/*    // data={movies}*/}
-            {/*    data={...element}*/}
-            {/*    pageSize={9}*/}
-            {/*    layout={"row"}*/}
-            {/*    renderItem={(item, key) => (*/}
-            {/*        <Post key={key} movie={item}/>*/}
-            {/*    )}*/}
-            {/*/>*/}
         </Wrapper>
     );
 };

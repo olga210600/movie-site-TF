@@ -6,30 +6,22 @@ import '../components.css'
 
 const SlidePost = styled.img`
   transition: 2s;
-  //width: 100%;
-  //height: 100%;
-  //object-fit: cover;
-  width: 230px !important;
-  height: 340px !important;
-  border-radius: 10px;
-  object-fit: cover;
+  width: 250px;
+  height: 350px;
+  box-sizing: border-box;
 `
 
 const SlideShowInfo = styled.div`
-  width: 300px;
-  /* background: aliceblue; */
-  height: 100%;
-  text-align: center;
   font-size: 34px;
   color: gold;
-  margin: 378px 0 0 -58px;
+  margin: 0 70px 0 -70px; 
+  box-sizing: border-box;
 `
 const SlideShowImg = styled.div`
-  width: 400px;
-  margin-top: 50px;
+  //
+  //
 
 `
-
 
 const Slider = styled.section`
   position: relative;
@@ -41,7 +33,7 @@ const Slider = styled.section`
   background: #2b2a2a;
   border-bottom: solid 15px black;
   border-radius: 12px;
-
+  object-fit: cover;
 `
 
 const ImageSlider = ({movies}) => {
