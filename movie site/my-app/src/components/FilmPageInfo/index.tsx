@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components'
 import Navigation from "../RouterNavigation";
+import EditWindow from "../EditWindow";
+import {IMovie} from "../../store/reducers/moviesReducer";
+import {useSelector} from "react-redux";
 
 
 const PageWrapper = styled.div`
@@ -104,11 +107,19 @@ const NavigationWrapper = styled.div`
 `
 
 const FilmPageInfo = ({movie}) => {
+    const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
+
+    const [editModalActive, setEditModalActive] = useState(false)
+
     return (
 
         <PageWrapper>
             <NavigationWrapper>
                 <Navigation/>
+                {
+                    isAdmin && <button  onClick={() => setEditModalActive(true) }>Edit Film</button>
+                }
+
                 {/*<p>Log in</p>*/}
             </NavigationWrapper>
 
@@ -137,6 +148,9 @@ const FilmPageInfo = ({movie}) => {
                 </iframe>
 
             </MovieVideo>
+
+
+            <EditWindow date={movie} active={editModalActive} setActive={setEditModalActive}/>
 
             {/*<iframe width="560" height="315" src={movie.video}*/}
             {/*        title="YouTube video player" frameBorder="0"*/}

@@ -64,30 +64,54 @@ const moviesSlice = createSlice({
             // state.filteredMovies = state.filteredMovies.filter(movie => movie.id !== action.payload)
             const clonedDefaultData = state.defaultData.filter(movie => movie.id !== action.payload)
             const clonedFilteredMovies = state.filteredMovies.filter(movie => movie.id !== action.payload)
-            console.log('state.delate',state.filteredMovies)
 
             return {
                 ...state,
                 defaultData: clonedDefaultData,
                 filteredMovies: clonedFilteredMovies,
             }
-        }
-        // removeMovie(state, action) {
-        //     return [
-        //         ...state.filter(movie => movie.id !== action.payload)
-        //     ]
-        // },
-        // editMovie(state, action) {
-        //     return [
-        //         // ...state.map(todo => {
-        //         //     if (todo.id === action.payload.id) {
-        //         //         return action.payload;
-        //         //     }
-        //         //
-        //         //     return todo;
-        //         // })
-        //     ]
-        // },
+        },
+        editMovie(state, action):any {
+            // @ts-ignore
+            // let currentFilmInDefaultData = state.defaultData.find((movie) => movie.id === action.payload)
+            // let currentFilmInFilteredData = state.filteredMovies.find((movie) => movie.id === action.payload)
+            // currentFilm[0] = state.filteredMovies
+            // currentFilm[0] = state.defaultData
+
+            console.log("currentFilm action.payload ",action.payload)
+
+            const clonedStateDefaultData = state.defaultData.map(movie => {
+                if (movie.id === action.payload.id) {
+                    movie = action.payload
+                    return movie
+                }
+                return movie
+            })
+
+            const clonedStateFilteredMovies = state.filteredMovies.map(movie => {
+
+
+                if (movie.id === action.payload.id) {
+
+                    movie = action.payload
+                    return movie
+                }
+
+                return movie
+            })
+
+            console.log('clonedStateDefaultData' ,clonedStateDefaultData)
+
+            return {
+                ...state,
+                defaultData: clonedStateDefaultData,
+                filteredMovies:clonedStateFilteredMovies
+                // defaultData: { ...action.payload },
+                // filteredMovies: { ...action.payload }
+            }
+
+
+        },
     }
 })
 
@@ -107,5 +131,5 @@ export function getFilteredList(selectedCategory, movieList) {
 
 export const getMovies = (state: { moviesList: IMovie[] }) => state.moviesList;
 export const moviesReducer = moviesSlice.reducer;
-export const {selectedFilms, userLogIn, adminLogIn, logOut, removeMovie} = moviesSlice.actions
+export const {selectedFilms, userLogIn, adminLogIn, logOut, removeMovie, editMovie} = moviesSlice.actions
 
