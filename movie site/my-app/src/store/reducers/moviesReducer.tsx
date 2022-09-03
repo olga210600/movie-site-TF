@@ -1,5 +1,6 @@
 import {createSlice, current} from '@reduxjs/toolkit';
 import {defaultData} from "../defaultData";
+import cloneDeep from "lodash/cloneDeep";
 
 
 export interface IMovie {
@@ -11,6 +12,9 @@ export interface IMovie {
     description: string;
     video: any;
     director: string;
+    ////////
+    isLiked: boolean,
+    isWatchLate: boolean,
 }
 
 // initialState: {
@@ -20,13 +24,14 @@ export interface IMovie {
 
 // initialState: defaultData as IMovie[],
 
+// @ts-ignore
 const moviesSlice = createSlice({
     initialState: {
-        // defaultData,
         defaultData: defaultData,
         filteredMovies: defaultData,
         isAdmin: false,
         isAuthorized: false,
+
     },
     name: 'moviesList',
     reducers: {
@@ -36,8 +41,6 @@ const moviesSlice = createSlice({
                 ...state,
                 filteredMovies: getFilteredList(action.payload, state.defaultData)
             }
-            // return state.filteredMovies = getFilteredList(action.payload, state.defaultData)
-
         },
         userLogIn(state, action) {
             return {
@@ -49,18 +52,18 @@ const moviesSlice = createSlice({
             return {
                 ...state,
                 isAdmin: true,
-
             }
         },
         logOut(state, action) {
             return {
                 ...state,
                 isAdmin: false,
-                isAuthorized: false
+                isAuthorized: false,
+                userLikedFilm: null,
             }
         },
         removeMovie(state, action) {
-            console.log('state.filteredMovies',current( state.filteredMovies))
+            console.log('state.filteredMovies', current(state.filteredMovies))
             // state.filteredMovies = state.filteredMovies.filter(movie => movie.id !== action.payload)
             const clonedDefaultData = state.defaultData.filter(movie => movie.id !== action.payload)
             const clonedFilteredMovies = state.filteredMovies.filter(movie => movie.id !== action.payload)
@@ -71,14 +74,10 @@ const moviesSlice = createSlice({
                 filteredMovies: clonedFilteredMovies,
             }
         },
-        editMovie(state, action):any {
+        editMovie(state, action): any {
             // @ts-ignore
-            // let currentFilmInDefaultData = state.defaultData.find((movie) => movie.id === action.payload)
-            // let currentFilmInFilteredData = state.filteredMovies.find((movie) => movie.id === action.payload)
-            // currentFilm[0] = state.filteredMovies
-            // currentFilm[0] = state.defaultData
 
-            console.log("currentFilm action.payload ",action.payload)
+            console.log("currentFilm action.payload ", action.payload)
 
             const clonedStateDefaultData = state.defaultData.map(movie => {
                 if (movie.id === action.payload.id) {
@@ -89,29 +88,85 @@ const moviesSlice = createSlice({
             })
 
             const clonedStateFilteredMovies = state.filteredMovies.map(movie => {
-
-
                 if (movie.id === action.payload.id) {
-
                     movie = action.payload
+                    return movie
+                }
+                return movie
+            })
+            return {
+                ...state,
+                defaultData: clonedStateDefaultData,
+                filteredMovies: clonedStateFilteredMovies
+            }
+        },
+        likedFilm(state, action):any {
+            console.log('action: ', action)
+            const copiedDefaultData = cloneDeep(state.defaultData)
+            const copiedFilteredMovies = cloneDeep(state.filteredMovies)
+            //     const a = JSON.stringify(defaultData)
+            // const b = JSON.parse(a)
+            const likedDefaultData = copiedDefaultData.map((movie) => {
+                if (movie.id === action.payload) {
+
+                    movie.isLiked = !movie.isLiked
+
                     return movie
                 }
 
                 return movie
             })
 
-            console.log('clonedStateDefaultData' ,clonedStateDefaultData)
+
+            const likedFilteredMovies = copiedFilteredMovies.map((movie) => {
+                if (movie.id === action.payload) {
+                    movie.isLiked = !movie.isLiked
+                    return movie
+                }
+                return movie
+            })
 
             return {
                 ...state,
-                defaultData: clonedStateDefaultData,
-                filteredMovies:clonedStateFilteredMovies
-                // defaultData: { ...action.payload },
-                // filteredMovies: { ...action.payload }
+                defaultData: likedDefaultData,
+                filteredMovies: likedFilteredMovies,
             }
-
-
         },
+        watchLateFilm(state, action):any {
+            // console.log('action: ', action)
+            const copiedDefaultData = cloneDeep(state.defaultData)
+            const copiedFilteredMovies = cloneDeep(state.filteredMovies)
+
+            const watchLateDefaultData = copiedDefaultData.map((movie) => {
+                if (movie.id === action.payload) {
+
+                    movie.isWatchLate = !movie.isWatchLate
+
+                    return movie
+                }
+
+                return movie
+            })
+
+
+            const watchLateFilteredMovies = copiedFilteredMovies.map((movie) => {
+                if (movie.id === action.payload) {
+                    movie.isWatchLate = !movie.isWatchLate
+                    return movie
+                }
+                return movie
+
+            })
+
+
+            return {
+                ...state,
+                defaultData: watchLateDefaultData,
+                filteredMovies: watchLateFilteredMovies,
+            }
+        }
+
+
     }
 })
 
@@ -131,5 +186,5 @@ export function getFilteredList(selectedCategory, movieList) {
 
 export const getMovies = (state: { moviesList: IMovie[] }) => state.moviesList;
 export const moviesReducer = moviesSlice.reducer;
-export const {selectedFilms, userLogIn, adminLogIn, logOut, removeMovie, editMovie} = moviesSlice.actions
+export const {selectedFilms, userLogIn, adminLogIn, logOut, removeMovie, editMovie, likedFilm, watchLateFilm} = moviesSlice.actions
 

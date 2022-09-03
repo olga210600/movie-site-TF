@@ -6,6 +6,8 @@ import {Form} from "formik";
 import {IMovie} from "../../store/reducers/moviesReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {logOut} from '../../store/reducers/moviesReducer'
+// @ts-ignore
+
 
 
 export const Wrapper = styled.div`
@@ -16,11 +18,11 @@ export const Wrapper = styled.div`
   font-size: 17px;
 
 
-& nav {
-  display: flex;
-  padding-top: 20px;
-  justify-content: space-between;
-}
+  & nav {
+    display: flex;
+    padding-top: 20px;
+    justify-content: space-between;
+  }
 `
 
 export const LinkWrapper = styled.div`
@@ -55,6 +57,7 @@ export const PATHS = {
     MAIN: "/",
 
     REGISTRATION_FORM: "/registration-form",
+    LIKED_MOVIE_PAGE:'/liked-movies'
     //////////////////////////////////
     // SIMPLE_FORM: "/simple-form",
     // ESSENTIAL_FORM: "/essential-form",
@@ -69,7 +72,7 @@ const Navigation = ({handleCategoryChange}: any) => {
     const currentPage = history.location.pathname;
 
     const state: IMovie[] = useSelector((state: any) => state.moviesList)
-    const isUser: IMovie[] = useSelector((state: any) => state.moviesList.isUser)
+    const isUser: IMovie[] = useSelector((state: any) => state.moviesList.isAuthorized)
     const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
     const dispatch = useDispatch()
 
@@ -77,44 +80,58 @@ const Navigation = ({handleCategoryChange}: any) => {
         <Wrapper>
             <nav>
 
-                    <LinkWrapper>
-                        <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}>
-                            Main page
-                        </Link>
+                <LinkWrapper>
+                    <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}>
+                        Main page
+                    </Link>
 
 
-                        <SelectWrapper>
-                            <MovieCategory>Filter by Category:</MovieCategory>
-                            <div>
-                                <select
-                                    name="category-list"
-                                    id="category-list"
-                                    onChange={handleCategoryChange}
-                                >
-                                    <option value="">All genres</option>
-                                    <option value="action movie">Action movie</option>
-                                    <option value="comedy">Comedy</option>
-                                </select>
-                            </div>
-                        </SelectWrapper>
-                    </LinkWrapper>
-
-
-                    <RegistrationWrapper>
-                        {!isAdmin && !isUser ?
-                            <Link
-                                isActive={currentPage === PATHS.REGISTRATION_FORM}
-                                to={PATHS.REGISTRATION_FORM}
+                    <SelectWrapper>
+                        <MovieCategory>Filter by Category:</MovieCategory>
+                        <div>
+                            <select
+                                name="category-list"
+                                id="category-list"
+                                onChange={handleCategoryChange}
                             >
-                                Log in
-                            </Link>
-                            :
-                            <LinkWrapper onClick={() => dispatch(logOut(state))}>
-                                Log out
-                            </LinkWrapper>
-                        }
-                    </RegistrationWrapper>
+                                <option value="">All genres</option>
+                                <option value="action movie">Action movie</option>
+                                <option value="comedy">Comedy</option>
+                            </select>
+                        </div>
+                    </SelectWrapper>
+                </LinkWrapper>
 
+                <div>
+                    {
+                        isUser &&
+                            <div>
+                                <Link isActive={currentPage === PATHS.LIKED_MOVIE_PAGE} to={PATHS.LIKED_MOVIE_PAGE}>
+                                    Liked Film
+                                </Link>
+
+                                <button>Watch Late</button>
+                            </div>
+
+                    }
+                </div>
+
+
+
+                <RegistrationWrapper>
+                    {!isAdmin && !isUser ?
+                        <Link
+                            isActive={currentPage === PATHS.REGISTRATION_FORM}
+                            to={PATHS.REGISTRATION_FORM}
+                        >
+                            Log in
+                        </Link>
+                        :
+                        <LinkWrapper onClick={() => dispatch(logOut(state))}>
+                            Log out
+                        </LinkWrapper>
+                    }
+                </RegistrationWrapper>
 
 
             </nav>

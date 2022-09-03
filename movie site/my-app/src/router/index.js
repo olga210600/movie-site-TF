@@ -5,6 +5,7 @@ import Main from "../pages/Main";
 import RouterNavigation from "../components/RouterNavigation";
 import FilmPage from "../components/FilmPage";
 import Registration from "../pages/Registration";
+import LikedFilmPage from "../pages/LikedFilmPage";
 
 const mockedOptions = {
     roles: [
@@ -39,6 +40,7 @@ const PublicRoutes = () => {
                 <Route exact path="/" element={withNavigation(Main)} />
                 <Route path="/movie-details" element={withNavigation(FilmPage)} />
                 <Route path="/registration-form" element={withNavigation(Registration, mockedData, mockedOptions)} />
+                <Route path="/liked-movies" element={withNavigation(LikedFilmPage)} />
 
 
 

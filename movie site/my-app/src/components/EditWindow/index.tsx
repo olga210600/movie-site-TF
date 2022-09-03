@@ -61,7 +61,7 @@ const getInitialValues = (data) => ({
 
 
 
-const EditWindow = ({date, active, setActive}) => {
+const EditWindow = ({date, active, setActive , currentFunction, currentButton}) => {
     const initialValues = useMemo(() => getInitialValues(date), [date]);
     const dispatch = useDispatch()
 
@@ -160,11 +160,12 @@ const EditWindow = ({date, active, setActive}) => {
                                         disabled={
                                             errors?.name || errors?.image || errors?.year || errors?.genre || errors?.description || errors?.director || errors?.video
                                         }
-                                        onClick={() => dispatch(editMovie(values))}
+                                        // onClick={() => dispatch(editMovie(values))}
+                                        onClick={() => currentFunction(values)}
 
                                         // onClick={() => setIsShowValues((prevState) => !prevState)}
                                     >
-                                        Submit
+                                        {currentButton}
                                     </button>
 
 

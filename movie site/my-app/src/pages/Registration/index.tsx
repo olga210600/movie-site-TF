@@ -34,6 +34,10 @@ const EssentialForm = () => {
         }
     }
 
+    console.log('isAdmin',isAdmin)
+    console.log('isAuthorized', isAuthorized)
+
+
     return (
         <Wrapper>
             <Formik

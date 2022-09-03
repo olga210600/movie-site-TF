@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import styled from 'styled-components'
 import Navigation from "../RouterNavigation";
 import EditWindow from "../EditWindow";
-import {IMovie} from "../../store/reducers/moviesReducer";
+import {IMovie, editMovie} from "../../store/reducers/moviesReducer";
 import {useSelector} from "react-redux";
+// import {editMovie} from '../../store/reducers/moviesReducer'
 
 
 const PageWrapper = styled.div`
@@ -106,10 +107,16 @@ const NavigationWrapper = styled.div`
   }
 `
 
+
+
 const FilmPageInfo = ({movie}) => {
     const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
 
     const [editModalActive, setEditModalActive] = useState(false)
+
+    const currentFunction = (values) => {
+       editMovie(values)
+    }
 
     return (
 
@@ -150,13 +157,7 @@ const FilmPageInfo = ({movie}) => {
             </MovieVideo>
 
 
-            <EditWindow date={movie} active={editModalActive} setActive={setEditModalActive}/>
-
-            {/*<iframe width="560" height="315" src={movie.video}*/}
-            {/*        title="YouTube video player" frameBorder="0"*/}
-            {/*        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"*/}
-            {/*        allowFullScreen>*/}
-            {/*</iframe>*/}
+            <EditWindow currentButton='Edit' currentFunction={currentFunction}  date={movie} active={editModalActive} setActive={setEditModalActive}/>
         </PageWrapper>
     );
 };

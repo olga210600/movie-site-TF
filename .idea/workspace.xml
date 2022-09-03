@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="50b7afb6-423c-4a86-a502-dda8453bfcec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/lodash/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/lodash/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +44,7 @@
       <recent name="C:\Users\Olga\Desktop\movie site\movie site\my-app\src\components\pages\Registration" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Olga\Desktop\movie site\movie site\my-app\src\pages" />
       <recent name="C:\Users\Olga\Desktop\movie site\movie site\my-app\src" />
     </key>
   </component>
@@ -82,6 +84,10 @@
       <workItem from="1662027309629" duration="6398000" />
       <workItem from="1662069178495" duration="2690000" />
       <workItem from="1662072723204" duration="6966000" />
+      <workItem from="1662114213829" duration="5054000" />
+      <workItem from="1662146847143" duration="4309000" />
+      <workItem from="1662154055479" duration="4695000" />
+      <workItem from="1662161956542" duration="2482000" />
     </task>
     <servers />
   </component>
