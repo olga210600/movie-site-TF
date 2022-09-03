@@ -7,15 +7,9 @@ import PageHeader from "../../components/PageHeader";
 import Navigation from "../../components/RouterNavigation";
 // import {PATHS} from '../../components/RouterNavigation'
 
-const LikedFilmPage = () => {
+const WatchLateFilmPage = () => {
     const filteredList: IMovie[] = useSelector((state: any) => state.moviesList.filteredMovies)
 
-    // const even = () => {
-    //     filteredList.map(movie => movie.isLiked === true)
-    //     // element === true;
-    // }
-
-    console.log('filteredList liked film', filteredList)
     return (
         <div>
             <Navigation />
@@ -23,8 +17,7 @@ const LikedFilmPage = () => {
             {
                 filteredList.map(movie => {
 
-                        // if (movie.isLiked === true) {
-                        if (movie.isLiked === true) {
+                        if (movie.isWatchLate === true) {
 
                             return (
 
@@ -50,4 +43,4 @@ const LikedFilmPage = () => {
     );
 };
 
-export default LikedFilmPage;
+export default WatchLateFilmPage;

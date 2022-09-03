@@ -9,7 +9,6 @@ import {logOut} from '../../store/reducers/moviesReducer'
 // @ts-ignore
 
 
-
 export const Wrapper = styled.div`
   height: 60px;
   width: 100%;
@@ -24,6 +23,7 @@ export const Wrapper = styled.div`
     justify-content: space-between;
   }
 `
+
 
 export const LinkWrapper = styled.div`
   display: flex;
@@ -44,11 +44,14 @@ export const MovieCategory = styled.div`
 
 export const Link = styled(RouterLink)`
   && {
-    color: ${({isActive}) => (isActive ? "#000000" : "black")};
+      //color: ${({isActive}) => (isActive ? "#000000" : "black")};
     text-decoration: none;
     //font-size: 18px;
+    color: ${({isActive}) => (isActive ? "pink" : "black")};
+    //background: red;
     width: 100px;
     margin: 0 20px 0 30px;
+    //color: red;
   }
 `;
 
@@ -57,7 +60,8 @@ export const PATHS = {
     MAIN: "/",
 
     REGISTRATION_FORM: "/registration-form",
-    LIKED_MOVIE_PAGE:'/liked-movies'
+    LIKED_MOVIE_PAGE: '/liked-movies',
+    WATCH_LATE_MOVIE_PAGE: '/watch-late-movies'
     //////////////////////////////////
     // SIMPLE_FORM: "/simple-form",
     // ESSENTIAL_FORM: "/essential-form",
@@ -66,10 +70,16 @@ export const PATHS = {
     // Registration_FORM: "/advanced-form",
 };
 
+const log = (i, d) => {
+    console.log(i === d)
+}
+
 const Navigation = ({handleCategoryChange}: any) => {
     const history = createBrowserHistory();
+    console.log('history', history)
 
     const currentPage = history.location.pathname;
+    console.log('currentPage', typeof (currentPage))
 
     const state: IMovie[] = useSelector((state: any) => state.moviesList)
     const isUser: IMovie[] = useSelector((state: any) => state.moviesList.isAuthorized)
@@ -82,6 +92,7 @@ const Navigation = ({handleCategoryChange}: any) => {
 
                 <LinkWrapper>
                     <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}>
+                        {/*<Link isActive={log(currentPage, PATHS.MAIN)} to={PATHS.MAIN}>*/}
                         Main page
                     </Link>
 
@@ -103,19 +114,21 @@ const Navigation = ({handleCategoryChange}: any) => {
                 </LinkWrapper>
 
                 <div>
+
                     {
                         isUser &&
-                            <div>
-                                <Link isActive={currentPage === PATHS.LIKED_MOVIE_PAGE} to={PATHS.LIKED_MOVIE_PAGE}>
-                                    Liked Film
-                                </Link>
+                        <div>
+                            <Link isActive={currentPage === PATHS.LIKED_MOVIE_PAGE} to={PATHS.LIKED_MOVIE_PAGE}>
+                                Liked Film
+                            </Link>
+                            <Link isActive={currentPage === PATHS.WATCH_LATE_MOVIE_PAGE} to={PATHS.WATCH_LATE_MOVIE_PAGE}>
+                                Watch Late Film
+                            </Link>
 
-                                <button>Watch Late</button>
-                            </div>
+                        </div>
 
                     }
                 </div>
-
 
 
                 <RegistrationWrapper>

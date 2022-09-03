@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="50b7afb6-423c-4a86-a502-dda8453bfcec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/lodash/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/lodash/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +29,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/movie site/my-app/src/pages" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -41,6 +40,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Olga\Desktop\movie site\movie site\my-app\src\pages" />
       <recent name="C:\Users\Olga\Desktop\movie site\movie site\my-app\src\components\pages\Registration" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -87,7 +87,8 @@
       <workItem from="1662114213829" duration="5054000" />
       <workItem from="1662146847143" duration="4309000" />
       <workItem from="1662154055479" duration="4695000" />
-      <workItem from="1662161956542" duration="2482000" />
+      <workItem from="1662161956542" duration="2607000" />
+      <workItem from="1662233620944" duration="5349000" />
     </task>
     <servers />
   </component>

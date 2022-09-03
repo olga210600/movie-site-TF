@@ -6,6 +6,8 @@ import RouterNavigation from "../components/RouterNavigation";
 import FilmPage from "../components/FilmPage";
 import Registration from "../pages/Registration";
 import LikedFilmPage from "../pages/LikedFilmPage";
+import WatchLateFilmPage from "../pages/WatchLateFilmPage";
+import Navigation from "../components/RouterNavigation";
 
 const mockedOptions = {
     roles: [
@@ -26,6 +28,7 @@ const mockedData = {
 const withNavigation = (Component, data = {}, options = {}) => {
     return (
         <>
+            {/*<Navigation/>*/}
             {/*<RouterNavigation />*/}
             <Component data={data} options={options} />
         </>
@@ -41,6 +44,7 @@ const PublicRoutes = () => {
                 <Route path="/movie-details" element={withNavigation(FilmPage)} />
                 <Route path="/registration-form" element={withNavigation(Registration, mockedData, mockedOptions)} />
                 <Route path="/liked-movies" element={withNavigation(LikedFilmPage)} />
+                <Route path="/watch-late-movies" element={withNavigation(WatchLateFilmPage)} />
 
 
 
