@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50b7afb6-423c-4a86-a502-dda8453bfcec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +30,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/movie site/my-app/src/pages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Сережа урок по формику и роутеры/formik-example" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -88,7 +89,10 @@
       <workItem from="1662146847143" duration="4309000" />
       <workItem from="1662154055479" duration="4695000" />
       <workItem from="1662161956542" duration="2607000" />
-      <workItem from="1662233620944" duration="5349000" />
+      <workItem from="1662233620944" duration="5791000" />
+      <workItem from="1662290201557" duration="8328000" />
+      <workItem from="1662306351862" duration="4363000" />
+      <workItem from="1662326669634" duration="6615000" />
     </task>
     <servers />
   </component>

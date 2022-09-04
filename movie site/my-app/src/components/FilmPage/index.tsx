@@ -21,8 +21,8 @@ const FilmPage = (props) => {
     const movies: IMovie[] = useSelector((state: any) => state.moviesList.defaultData)
 
     const params = new URLSearchParams(history.location.search);
-    const name = params.get("filmId");
-    console.log('name: ', name)
+    const filmName = params.get("filmId");
+    console.log('name: ', filmName)
 
     console.log('history', history)
     return (
@@ -30,7 +30,7 @@ const FilmPage = (props) => {
             {
                 movies.map(movie => {
 
-                        if (movie.name === name) {
+                        if (movie.id === filmName) {
 
                             return (
                                 <PageWrapper>

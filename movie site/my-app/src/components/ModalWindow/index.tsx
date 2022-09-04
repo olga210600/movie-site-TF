@@ -1,10 +1,10 @@
 import React, {useMemo} from 'react';
 import styled from 'styled-components'
-// import './window.css'
 import {Formik, Field, Form} from "formik";
 import {validateSchema} from "./schema";
 import {useDispatch} from "react-redux";
-import {editMovie} from '../../store/reducers/moviesReducer'
+import { v4 as uuidv4 } from 'uuid';
+import {editMovie, addNewMovie, IMovie} from '../../store/reducers/moviesReducer'
 
 
 const Modal = styled.div`
@@ -17,26 +17,35 @@ const Modal = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-    // ${({isActive}) => isActive && `
-  //  display: flex;
-  // align-items: center;
-  // justify-content: center;
-  // `}
-
-  // analog
-  transform: ${({isActive}) => isActive ? 'scale(1)' : 'scale(0)'};
-
-    //background: ${({isActive}) => isActive ? 'red' : 'green'};
+  z-index: 10;
+  //transform: scale(1);
 
 
-    // ${({isActive}) => isActive ? `
-  //   transform: scale(1);
-  // ` : `
-  // transform: scale(0);
-  // `}
 
 
+`
+//${({isActive}) => isActive && `
+//  display: flex;
+// align-items: center;
+// justify-content: center;
+// `}
+
+// analog
+//transform: ${({isActive}) => isActive ? 'scale(1)' : 'scale(0)'};
+
+//background: ${({isActive}) => isActive ? 'red' : 'green'};
+
+
+//   ${({isActive}) => isActive ? `
+//   transform: scale(1);
+// ` : `
+// transform: scale(0);
+// `}
+
+const EditBtn = styled.button`
+  width: 50px;
+  height: 30px;
+  background: orange;
 `
 
 const ModalContent = styled.div`
@@ -48,30 +57,37 @@ const ModalContent = styled.div`
 
 `
 const getInitialValues = (data) => ({
-    name: data?.name ?? "",
-    image: data?.image ?? "",
-    year: data?.year ?? "",
-    genre: data?.genre ?? "",
-    description: data?.description ?? "",
-    director: data?.director ?? "",
-    video: data?.video ?? "",
-    id: data?.id ?? "",
+    name: data?.name ?? "wert",
+    image: data?.image ?? "erty",
+    year: data?.year ?? "werty",
+    genre: data?.genre ?? "wertg",
+    description: data?.description ?? "werth",
+    director: data?.director ?? "werg",
+    video: data?.video ?? "ert",
+    id: data?.id ?? uuidv4(),
 
 });
 
 
 
-const EditWindow = ({date, active, setActive , currentFunction, currentButton}) => {
+
+const EditWindow = ({date, currentButton , handleClose}) => {
     const initialValues = useMemo(() => getInitialValues(date), [date]);
     const dispatch = useDispatch()
 
-    console.log('data current film',date)
+    const currentFunction = (value) => {
+        //разкоментировать!!!!!!!
+        // dispatch(editMovie(value))
+        dispatch(addNewMovie(value))
+    }
 
+    // @ts-ignore
     return (
 
-        <Modal isActive={active} onClick={() => setActive(false)}>
+        <Modal
+        >
             <ModalContent
-                 onClick={e => e.stopPropagation()}
+                onClick={e => e.stopPropagation()}
             >
                 <div>
                     <Formik
@@ -82,8 +98,7 @@ const EditWindow = ({date, active, setActive , currentFunction, currentButton}) 
                         validateOnMount
                     >
                         {({values, errors}) => {
-                            // console.log("errors: ", errors);
-                            // console.log('values', values)
+                            // @ts-ignore
                             // @ts-ignore
                             // @ts-ignore
                             return (
@@ -153,22 +168,18 @@ const EditWindow = ({date, active, setActive , currentFunction, currentButton}) 
                                         )}
                                     </div>
 
-                                    {
-                                        console.log('date date',date)
-                                    }
-                                    <button
-                                        disabled={
-                                            errors?.name || errors?.image || errors?.year || errors?.genre || errors?.description || errors?.director || errors?.video
-                                        }
-                                        // onClick={() => dispatch(editMovie(values))}
-                                        onClick={() => currentFunction(values)}
-
-                                        // onClick={() => setIsShowValues((prevState) => !prevState)}
-                                    >
+                                    <EditBtn
+                                        // disabled={
+                                        //     errors?.name || errors?.image || errors?.year || errors?.genre || errors?.description || errors?.director || errors?.video
+                                        // }
+                                        onClick={() => {
+                                            handleClose()
+                                            currentFunction(values)
+                                        }}>
                                         {currentButton}
-                                    </button>
+                                    </EditBtn>
 
-
+                                    <button onClick={() => {handleClose()}}>Close</button>
                                 </Form>
                             );
                         }}

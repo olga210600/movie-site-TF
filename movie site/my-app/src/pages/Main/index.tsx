@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {IMovie} from "../../store/reducers/moviesReducer";
+import {IMovie, addNewMovie} from "../../store/reducers/moviesReducer";
 import React, {useEffect, useMemo, useState} from "react";
 // import '../components.css'
 import PaginationList from 'react-pagination-list';
@@ -9,6 +9,7 @@ import PageHeader from "../../components/PageHeader";
 import {selectedFilms} from '../../store/reducers/moviesReducer'
 import ImageSlider from "../../components/ImageSlider";
 import Post from "../../components/Post";
+import EditWindow from "../../components/ModalWindow";
 
 
 const Wrapper = styled.div`
@@ -33,16 +34,27 @@ const Main = () => {
     const movies: IMovie[] = useSelector((state: any) => state.moviesList.defaultData)
     const filteredList: IMovie[] = useSelector((state: any) => state.moviesList.filteredMovies)
     const dispatch = useDispatch()
+    const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
+    const [addModalActive, setAddModalActive] = useState(false)
+
 
     function handleCategoryChange(event) {
-        dispatch(selectedFilms( event.target.value))
+        dispatch(selectedFilms(event.target.value))
 
     }
 
     return (
         <Wrapper>
-            <PageHeader handleCategoryChange={handleCategoryChange}/>
+            <PageHeader setAddModalActive={setAddModalActive} handleCategoryChange={handleCategoryChange}/>
 
+            {
+                addModalActive &&
+                <EditWindow
+                    currentButton='Add'
+                    // currentFunctionAdd={addNewMovie}
+                    date={movies} handleClose={() => setAddModalActive(false)}
+                />
+            }
             <ImageSlider movies={movies}/>
 
             <PaginationList
@@ -50,7 +62,7 @@ const Main = () => {
                 pageSize={9}
                 layout={"row"}
                 renderItem={(item, key) => (
-                    <Post filmId={item.name} key={key} movie={item}/>
+                    <Post filmId={item.id} key={key} movie={item}/>
                 )}
             />
         </Wrapper>

@@ -6,6 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {removeMovie, likedFilm, watchLateFilm} from '../../store/reducers/moviesReducer'
 import cloneDeep from 'lodash/cloneDeep'
 
+import {LinkWrapper, PATHS} from "../RouterNavigation";
+
 
 const PostWrapper = styled.div`
   width: 200px;
@@ -61,8 +63,9 @@ const Post = ({movie, filmId}: any) => {
             <div>
                 <button onClick={() => dispatch(removeMovie(movie.id))}>x</button>
             </div>
-
             }
+
+
 
             {isAuthorized &&
                 <div>
@@ -73,6 +76,7 @@ const Post = ({movie, filmId}: any) => {
                  </div>
 
             }
+            {/*<Link to={{pathname: `/movie-details?filmId=${filmId}`}}>*/}
             <Link to={{pathname: `/movie-details?filmId=${filmId}`}}>
                 <PostWrapper>
 

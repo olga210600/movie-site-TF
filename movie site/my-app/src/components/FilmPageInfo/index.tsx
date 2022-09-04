@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
-import Navigation from "../RouterNavigation";
-import EditWindow from "../EditWindow";
-import {IMovie, editMovie} from "../../store/reducers/moviesReducer";
-import {useSelector} from "react-redux";
+import Navigation, { PATHS} from "../RouterNavigation";
+import {Link as RouterLink} from "react-router-dom";
+
+import EditWindow from "../ModalWindow";
+import {IMovie, editMovie, likedFilm, watchLateFilm, removeMovie} from "../../store/reducers/moviesReducer";
+import {useDispatch, useSelector} from "react-redux";
 // import {editMovie} from '../../store/reducers/moviesReducer'
+import {createBrowserHistory} from "history";
 
 
 const PageWrapper = styled.div`
@@ -106,34 +109,89 @@ const NavigationWrapper = styled.div`
     display: contents;
   }
 `
+export const Link = styled(RouterLink)`
+ color: white;
+  font-size: 20px;
+  
+`
 
 
 
 const FilmPageInfo = ({movie}) => {
     const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
+    const movies: IMovie[] = useSelector((state: any) => state.moviesList)
+    const isAuthorized: IMovie[] = useSelector((state: any) => state.moviesList.isAuthorized)
+    const isActiveModalWindow: IMovie[] = useSelector((state: any) => state.isActiveModalWindow)
+    console.log('isActive',isActiveModalWindow)
+    const dispatch = useDispatch()
+    const history = createBrowserHistory();
+    console.log('history', history)
 
+    const currentPage = history.location.pathname;
+
+    // закоментиррвала
     const [editModalActive, setEditModalActive] = useState(false)
 
-    const currentFunction = (values) => {
-       editMovie(values)
-    }
+    // const currentFunction = (values) => {
+    //    editMovie(values)
+    // }
+
 
     return (
+
 
         <PageWrapper>
             <NavigationWrapper>
                 <Navigation/>
-                {
-                    isAdmin && <button  onClick={() => setEditModalActive(true) }>Edit Film</button>
-                }
 
-                {/*<p>Log in</p>*/}
+                {/*закоментировада*/}
+
+                    <div>
+                        {isAdmin && <button  onClick={() => setEditModalActive(true) }>Edit Film</button>}
+
+                    </div>
+
+
+
+
             </NavigationWrapper>
 
             <FilmInfoWrapper>
+
+                {/*{*/}
+                {/*    editModalActive &&*/}
+                {/*    // <ModalWindow currentButton='Edit'   date={movie} active={editModalActive} />*/}
+                {/*    <EditWindow  currentButton='Edit'   date={movie} handleClose={() => setEditModalActive(false)}*/}
+
+                {/*    />*/}
+
+
+                {/*}*/}
+
+
+                {isAdmin &&
+
+                <Link to={PATHS.MAIN}
+                      onClick={() => dispatch(removeMovie(movie.id))}
+                >
+                    X
+                </Link>
+
+                }
                 <ImageWrapper>
                     <Image src={movie.image}/>
+                    {isAuthorized &&
+                    <div>
+                        <button onClick={() => dispatch(likedFilm(movie.id))}>{movie.isLiked ? 'Liked' : 'like'}</button>
+
+                        <button onClick={() => dispatch(watchLateFilm(movie.id))}>{movie.isWatchLate ? 'Watched late' : 'Watch late'}</button>
+
+                    </div>
+
+                    }
                 </ImageWrapper>
+
+
 
 
                 <FilmInfo>
@@ -157,7 +215,19 @@ const FilmPageInfo = ({movie}) => {
             </MovieVideo>
 
 
-            <EditWindow currentButton='Edit' currentFunction={currentFunction}  date={movie} active={editModalActive} setActive={setEditModalActive}/>
+
+            {/*закоментировада*/}
+            {
+                editModalActive &&
+                <EditWindow
+                    currentButton='Edit'
+                    date={movie}
+                    handleClose={() => setEditModalActive(false)}
+                />
+            }
+
+
+
         </PageWrapper>
     );
 };

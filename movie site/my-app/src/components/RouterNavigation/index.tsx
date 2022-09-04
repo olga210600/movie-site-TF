@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {createBrowserHistory} from "history";
 import styled from "styled-components";
 import {Link as RouterLink} from "react-router-dom";
@@ -6,6 +6,7 @@ import {Form} from "formik";
 import {IMovie} from "../../store/reducers/moviesReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {logOut} from '../../store/reducers/moviesReducer'
+import EditWindow from "../ModalWindow";
 // @ts-ignore
 
 
@@ -74,17 +75,19 @@ const log = (i, d) => {
     console.log(i === d)
 }
 
-const Navigation = ({handleCategoryChange}: any) => {
+const Navigation = ({setAddModalActive, handleCategoryChange}: any) => {
     const history = createBrowserHistory();
     console.log('history', history)
 
     const currentPage = history.location.pathname;
     console.log('currentPage', typeof (currentPage))
 
-    const state: IMovie[] = useSelector((state: any) => state.moviesList)
+    const movies: IMovie[] = useSelector((state: any) => state.moviesList)
     const isUser: IMovie[] = useSelector((state: any) => state.moviesList.isAuthorized)
     const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
     const dispatch = useDispatch()
+
+    const [editModalActive, setEditModalActive] = useState(false)
 
     return (
         <Wrapper>
@@ -92,7 +95,6 @@ const Navigation = ({handleCategoryChange}: any) => {
 
                 <LinkWrapper>
                     <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}>
-                        {/*<Link isActive={log(currentPage, PATHS.MAIN)} to={PATHS.MAIN}>*/}
                         Main page
                     </Link>
 
@@ -113,6 +115,19 @@ const Navigation = ({handleCategoryChange}: any) => {
                     </SelectWrapper>
                 </LinkWrapper>
 
+                {/*{*/}
+                {/*    isAdmin &&*/}
+                {/*    <button  onClick={() => setEditModalActive(true)}>Create new film</button>*/}
+                {/*}*/}
+                {/*{*/}
+                {/*    editModalActive &&*/}
+                {/*    // <ModalWindow currentButton='Edit'   date={movie} active={editModalActive} />*/}
+                {/*    <EditWindow  currentButton='Edit'   date={movies} handleClose={() => setEditModalActive(false)}*/}
+
+                {/*    />*/}
+
+
+                {/*}*/}
                 <div>
 
                     {
@@ -130,6 +145,11 @@ const Navigation = ({handleCategoryChange}: any) => {
                     }
                 </div>
 
+                {/*add film*/}
+                { isAdmin && <button  onClick={() => setAddModalActive(true) }>Create new Film</button>}
+
+
+
 
                 <RegistrationWrapper>
                     {!isAdmin && !isUser ?
@@ -140,18 +160,34 @@ const Navigation = ({handleCategoryChange}: any) => {
                             Log in
                         </Link>
                         :
-                        <LinkWrapper onClick={() => dispatch(logOut(state))}>
-                            Log out
-                        </LinkWrapper>
+                        // <LinkWrapper onClick={() => dispatch(logOut(state))}>
+                        //     Log out
+                        // </LinkWrapper>
+
+
+                        <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN} onClick={() => dispatch(logOut(movies))}>
+                        Log out
+                        </Link>
                     }
                 </RegistrationWrapper>
 
 
             </nav>
-            {/* <button onClick={() => history.push("https://www.google.com/")}>
-        Some route
-      </button> */}
+
+
+      {/*add film*/}
+            {/*{*/}
+            {/*    editModalActive &&*/}
+            {/*    // <ModalWindow currentButton='Edit'   date={movie} active={editModalActive} />*/}
+            {/*    <EditWindow  currentButton='Edit'   date={movies} handleClose={() => setEditModalActive(false)}*/}
+
+            {/*    />*/}
+
+
+            {/*}*/}
         </Wrapper>
+
+
     );
 };
 
