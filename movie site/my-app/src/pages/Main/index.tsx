@@ -9,7 +9,7 @@ import PageHeader from "../../components/PageHeader";
 import {selectedFilms} from '../../store/reducers/moviesReducer'
 import ImageSlider from "../../components/ImageSlider";
 import Post from "../../components/Post";
-import EditWindow from "../../components/ModalWindow";
+import ModalWindow from "../../components/ModalWindow";
 
 
 const Wrapper = styled.div`
@@ -43,15 +43,24 @@ const Main = () => {
 
     }
 
+    const currentFunction = (values) => {
+        //разкоментировать!!!!!!!
+        // dispatch(editMovie(value))
+        dispatch(addNewMovie(values))
+    }
+
     return (
         <Wrapper>
             <PageHeader setAddModalActive={setAddModalActive} handleCategoryChange={handleCategoryChange}/>
 
             {
                 addModalActive &&
-                <EditWindow
+                <ModalWindow
                     currentButton='Add'
-                    // currentFunctionAdd={addNewMovie}
+
+
+                    // currentFunction={addNewMovie}
+                    currentFunction={currentFunction}
                     date={movies} handleClose={() => setAddModalActive(false)}
                 />
             }

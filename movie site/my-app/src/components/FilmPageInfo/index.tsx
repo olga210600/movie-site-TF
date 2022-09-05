@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import Navigation, { PATHS} from "../RouterNavigation";
 import {Link as RouterLink} from "react-router-dom";
 
-import EditWindow from "../ModalWindow";
-import {IMovie, editMovie, likedFilm, watchLateFilm, removeMovie} from "../../store/reducers/moviesReducer";
+import ModalWindow from "../ModalWindow";
+import {IMovie, editMovie, addNewMovie, likedFilm, watchLateFilm, removeMovie} from "../../store/reducers/moviesReducer";
 import {useDispatch, useSelector} from "react-redux";
 // import {editMovie} from '../../store/reducers/moviesReducer'
 import {createBrowserHistory} from "history";
@@ -136,6 +136,12 @@ const FilmPageInfo = ({movie}) => {
     //    editMovie(values)
     // }
 
+    const currentFunction = (values) => {
+        //разкоментировать!!!!!!!*/}
+       // dispatch(editMovie(value))*/}
+      dispatch(editMovie(values))
+   }
+    {/*закоментировада*/}
 
     return (
 
@@ -215,12 +221,12 @@ const FilmPageInfo = ({movie}) => {
             </MovieVideo>
 
 
-
-            {/*закоментировада*/}
+         {/*/!*ТУТ*!//////////////////////////////////////////////////////////////*/}
             {
                 editModalActive &&
-                <EditWindow
+                <ModalWindow
                     currentButton='Edit'
+                    currentFunction={currentFunction}
                     date={movie}
                     handleClose={() => setEditModalActive(false)}
                 />

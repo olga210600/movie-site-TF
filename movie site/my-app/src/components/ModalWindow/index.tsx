@@ -57,13 +57,13 @@ const ModalContent = styled.div`
 
 `
 const getInitialValues = (data) => ({
-    name: data?.name ?? "wert",
-    image: data?.image ?? "erty",
-    year: data?.year ?? "werty",
-    genre: data?.genre ?? "wertg",
-    description: data?.description ?? "werth",
-    director: data?.director ?? "werg",
-    video: data?.video ?? "ert",
+    name: data?.name ?? "",
+    image: data?.image ?? "",
+    year: data?.year ?? "",
+    genre: data?.genre ?? "",
+    description: data?.description ?? "",
+    director: data?.director ?? "",
+    video: data?.video ?? "",
     id: data?.id ?? uuidv4(),
 
 });
@@ -71,15 +71,15 @@ const getInitialValues = (data) => ({
 
 
 
-const EditWindow = ({date, currentButton , handleClose}) => {
+const ModalWindow = ({date, currentFunction, currentButton , handleClose}) => {
     const initialValues = useMemo(() => getInitialValues(date), [date]);
     const dispatch = useDispatch()
 
-    const currentFunction = (value) => {
-        //разкоментировать!!!!!!!
-        // dispatch(editMovie(value))
-        dispatch(addNewMovie(value))
-    }
+    // const currentFunction = (value) => {
+    //     //разкоментировать!!!!!!!
+    //     // dispatch(editMovie(value))
+    //     dispatch(addNewMovie(value))
+    // }
 
     // @ts-ignore
     return (
@@ -192,4 +192,4 @@ const EditWindow = ({date, currentButton , handleClose}) => {
     );
 };
 
-export default EditWindow;
+export default ModalWindow;
