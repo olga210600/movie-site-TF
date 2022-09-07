@@ -12,17 +12,12 @@ import EditWindow from "../ModalWindow";
 import add from '../../img/add-tool-svgrepo-com.svg'
 
 export const Wrapper = styled.div`
-  height: 60px;
-  width: 100%;
-  background: white;
-  margin: 0;
-  font-size: 17px;
-
 
   & nav {
     display: flex;
-    padding-top: 16px;
-    justify-content: space-between;
+    margin: 0;
+    justify-content: right;
+   
   }
 `
 
@@ -34,12 +29,14 @@ export const LinkWrapper = styled.div`
 
 export const SelectWrapper = styled.div`
   display: flex;
+  margin-left: 25px;
+  margin-right: 25px;
 `
 
 export const RegistrationWrapper = styled.div`
-  margin-right: 30px;
+  //margin-right: 30px;
   //display: flex;
-  align-items: center;
+  //align-items: center;
 `
 
 export const MovieCategory = styled.div`
@@ -48,44 +45,45 @@ export const MovieCategory = styled.div`
 `
 
 const LogInWrapper = styled.div`
-margin-top: 4px;
+//margin-top: 4px;
 `
 
 export const Link = styled(RouterLink)`
+  text-decoration: none;
   && {
       //color: ${({isActive}) => (isActive ? "#000000" : "black")};
-    text-decoration:  ${({isActive}) => (isActive ? "underline" : "none")};;
-    //text-decoration: none;
-    //font-size: 18px;
+    //text-decoration:  ${({isActive}) => (isActive ? "underline" : "none")};;
     color: ${({isActive}) => (isActive ? "pink" : "black")};
-    //background: red;
-    width: 100px;
-    margin: 0 20px 0 30px;
-    padding:5px;
-
+    //padding:5px;
+    //
     :hover {
       color: grey;
-      //background: #276927;
-      //border-radius: 5px;
-      //text-decoration: line-u;
     }
   }
 `;
 
 
 const AddBtn = styled.button`
+  //border: none;
+  //background: #ffffff;
+  ////font-size: 17px;
+  //padding: 5px;
+  //border: none;
+  font-size: 19px;
+  margin-right: 25px;
   border: none;
-  background: #ffffff;
-  font-size: 17px;
-  padding: 5px;
+  background: none;
+  color: white;
+  
+  //margin-top: 4px;
 
 
   && {
-    background: ${({isActive}) => (isActive ? "darkgrey" : "white")};
-    color: ${({isActive}) => (isActive ? "grey" : "black")};
-    border-radius: 5px;
-    cursor: ${({isActive}) => (isActive ? "none" : "pointer")};
-    
+    //background: ${({isActive}) => (isActive ? "darkgrey" : "white")};
+    //color: ${({isActive}) => (isActive ? "grey" : "black")};
+    //border-radius: 5px;
+    //cursor: ${({isActive}) => (isActive ? "none" : "pointer")};
+
 
   }
 

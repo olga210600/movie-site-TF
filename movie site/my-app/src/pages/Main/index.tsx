@@ -10,15 +10,14 @@ import {selectedFilms} from '../../store/reducers/moviesReducer'
 import ImageSlider from "../../components/ImageSlider";
 import Post from "../../components/Post";
 import ModalWindow from "../../components/ModalWindow";
+// import headerImg from "../../img/1640212391_5-abrakadabra-fun-p-fon-listya-paporotnika-5.jpg"
 
 
 const Wrapper = styled.div`
-  width: 63%;
-  min-width: 750px;
-  margin: 70px auto;
+  
   background: #2b2a2a;
   box-sizing: border-box;
-  //padding-top: 0;
+ 
 
   & div {
     & div {
@@ -33,6 +32,37 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
   }
+`
+
+const HeaderWrapper = styled.div`
+  height: 450px;
+  position: relative;
+  //display: flex;
+  font-size: 19px;
+  //padding-right: 15px;
+  color: white;
+`
+
+const HeaderImg = styled.img`
+width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  //background-color:rgba(0,0,0,.5);
+
+`
+
+const HeaderLink = styled.div`
+  width: 100%;
+  height: 40px;
+  margin-top: 40px;
+  //background: white;
+position: absolute;
+  top: 0;
+  padding-right: 50px;
+  box-sizing: border-box;
+  //display: flex;
+  
 `
 
 
@@ -57,20 +87,29 @@ const Main = () => {
 
     return (
         <Wrapper>
-            <PageHeader setAddModalActive={setAddModalActive} handleCategoryChange={handleCategoryChange}/>
+            <HeaderWrapper>
+                <HeaderImg src={"https://p4.wallpaperbetter.com/wallpaper/527/320/1017/interstellar-movie-movies-astronaut-sea-wallpaper-preview.jpg"}/>
+                {/*<img src={}/>*/}
 
-            {
-                addModalActive &&
-                <ModalWindow
-                    currentButton='Add'
+                <HeaderLink>
+                    <PageHeader setAddModalActive={setAddModalActive} handleCategoryChange={handleCategoryChange}/>
+
+                    {
+                        addModalActive &&
+                        <ModalWindow
+                            currentButton='Add'
+                            currentFunction={currentFunction}
+                            date={movies} handleClose={() => setAddModalActive(false)}
+                        />
+                    }
+                </HeaderLink>
+
+            </HeaderWrapper>
 
 
-                    // currentFunction={addNewMovie}
-                    currentFunction={currentFunction}
-                    date={movies} handleClose={() => setAddModalActive(false)}
-                />
-            }
-            <ImageSlider movies={movies}/>
+            {/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!слфйдер*/}
+            {/*<ImageSlider movies={movies}/>*/}
+{/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/}
 
             <PaginationList
                 data={filteredList}
