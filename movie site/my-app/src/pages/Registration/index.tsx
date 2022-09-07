@@ -4,8 +4,6 @@ import {validateSchema} from "./schema";
 import {
     Wrapper,
     FormField,
-    SubmitButton,
-    CodeWrapper,
     ErrorMessage,
 } from "./styles";
 import {IMovie} from "../../store/reducers/moviesReducer";
@@ -13,17 +11,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {userLogIn, adminLogIn} from "../../store/reducers/moviesReducer"
 import {Link, PATHS} from '../../components/RouterNavigation'
 import {createBrowserHistory} from "history";
-import {useFormik} from 'formik';
-
 
 const EssentialForm = () => {
-
     const history = createBrowserHistory();
     const currentPage = history.location.pathname;
     const isAuthorized: IMovie[] = useSelector((state: any) => state.moviesList.isAuthorized)
     const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
     const dispatch = useDispatch()
-
 
     const getUser = (object) => {
         const userInfo = Object.values(object)
@@ -33,10 +27,6 @@ const EssentialForm = () => {
             dispatch(userLogIn(isAuthorized))
         }
     }
-
-    console.log('isAdmin',isAdmin)
-    console.log('isAuthorized', isAuthorized)
-
 
     return (
         <Wrapper>
@@ -54,17 +44,6 @@ const EssentialForm = () => {
 
                     return (
                         <Form>
-                            {/*<h3>With simple fields validation</h3>*/}
-
-                            {/*<FormField isError={errors?.userName}>*/}
-                            {/*    <label htmlFor="userName">First Name</label>*/}
-                            {/*    <Field id="userName" name="userName" placeholder="Name"/>*/}
-
-                            {/*    {errors?.userName && (*/}
-                            {/*        <ErrorMessage>{errors?.userName}</ErrorMessage>*/}
-                            {/*    )}*/}
-                            {/*</FormField>*/}
-
 
                             <FormField isError={errors?.email}>
                                 <label htmlFor="email">Email</label>
@@ -89,19 +68,13 @@ const EssentialForm = () => {
                                 )}
                             </FormField>
 
-
-                            {/*<Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}>*/}
-                            {/*    Main page*/}
-                            {/*</Link>*/}
-
-
                             {
                                 errors?.email || errors?.password ?
                                     <div>Add Info</div> :
 
                                     <div>
                                         <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}
-                                            onClick={() => getUser(values)}
+                                              onClick={() => getUser(values)}
                                         >
                                             Log in
                                         </Link>
@@ -111,52 +84,11 @@ const EssentialForm = () => {
                         </Form>
                     );
                 }}
-                    </Formik>
-                    </Wrapper>
-                    );
-                };
+            </Formik>
+        </Wrapper>
+    );
+};
 
 
 export default EssentialForm;
 
-
-{/*<SubmitButton*/
-}
-{/*    disabled={*/
-}
-{/*        errors?.userName || errors?.email || errors?.password*/
-}
-{/*    }*/
-}
-{/*    onClick={() => dispatch(userLogIn(isUser))}*/
-}
-
-{/*>*/
-}
-{/*    Create new user*/
-}
-{/*</SubmitButton>*/
-}
-
-{/*<SubmitButton*/
-}
-{/*    disabled={*/
-}
-{/*        errors?.userName || errors?.email || errors?.password*/
-}
-{/*    }*/
-}
-{/*    onClick={() => dispatch(adminLogIn(isAdmin))}*/
-}
-
-{/*>*/
-}
-{/*    Log like admin*/
-}
-{/*</SubmitButton>*/
-}
-
-{/* <button onClick={() => history.push("https://www.google.com/")}>
-        Some route
-      </button> */
-}

@@ -10,7 +10,8 @@ const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  //width: 100%;
+  //background: red;
+  //width: 100vw;
 `
 
 const FilmPage = (props) => {
@@ -38,7 +39,7 @@ const FilmPage = (props) => {
 
                                     <FilmPageInfo movie={movie}/>
 
-                                </PageWrapper>
+                                 </PageWrapper>
 
 
                             )

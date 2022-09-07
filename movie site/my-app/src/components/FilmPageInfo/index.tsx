@@ -1,13 +1,22 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
-import Navigation, { PATHS} from "../RouterNavigation";
+import Navigation, {PATHS} from "../RouterNavigation";
 import {Link as RouterLink} from "react-router-dom";
-
 import ModalWindow from "../ModalWindow";
-import {IMovie, editMovie, addNewMovie, likedFilm, watchLateFilm, removeMovie} from "../../store/reducers/moviesReducer";
+import {
+    IMovie,
+    editMovie,
+    addNewMovie,
+    likedFilm,
+    watchLateFilm,
+    removeMovie
+} from "../../store/reducers/moviesReducer";
 import {useDispatch, useSelector} from "react-redux";
-// import {editMovie} from '../../store/reducers/moviesReducer'
 import {createBrowserHistory} from "history";
+// @ts-ignore
+import deleteImg from '../../img/delete-svgrepo-com.svg'
+// @ts-ignore
+import editImg from '../../img/edit-svgrepo-com.svg'
 
 
 const PageWrapper = styled.div`
@@ -15,44 +24,35 @@ const PageWrapper = styled.div`
   min-width: 750px;
   height: 100%;
   background: #2b2a2a;
+  box-sizing: border-box;
   margin: 70px 0 70px 0;
   font-family: sans-serif;
   padding-bottom: 20px;
   justify-content: center;
-  //background: orange;
-
-  
-
 `
 
 const FilmInfoWrapper = styled.div`
   display: flex;
-  //margin: auto;
+  box-sizing: border-box;
+  position: relative;
+  margin-top: 30px;
 `
 
 const FilmInfo = styled.div`
-  width: 570px;
-  //background: darkgrey;
   height: 100%;
   color: white;
+  box-sizing: border-box;
 `
 
 const ImageWrapper = styled.div`
-  width: 450px;
+  width: 300px;
   height: 400px;
-  margin: 40px;
+  margin: 40px 20px 40px 76px;
   object-fit: cover;
-  
-
-
 `
 const Image = styled.img`
   width: 100%;
   height: 100%;
-  
-  
-
-
 `
 
 const MovieName = styled.p`
@@ -66,55 +66,85 @@ const MovieYear = styled.p`
 `
 
 const MovieGenre = styled.p`
-  font-size: 20px;
+  font-size: 19px;
   margin: 10px;
-
 `
 
 const MovieDirected = styled.p`
-  font-size: 20px;
+  font-size: 19px;
   margin: 10px;
-
 `
+
 const MovieDescription = styled.p`
   font-size: 17px;
-  //margin: 10px;
   color: white;
   width: 600px;
   margin: auto;
   text-align: justify;
   text-indent: 20px;
   font-family: sans-serif;
-
 `
+
 const MovieVideo = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 30px 0 50px 0;
-
 `
 
+// const NavigationWrapper = styled.div`
+//   //width: 100%;
+//   height: 50px;
+//   background: white;
+//   display: flex;
+//   color: black;
+//   //justify-content: space-around;
+//
+//   & div {
+//     display: contents;
+//   }
+// `
 
-const NavigationWrapper = styled.div`
-  //width: 100%;
-  height: 50px;
-  background: white;
+const ButtonsWrapper = styled.div`
   display: flex;
-  color: black;
-  //justify-content: space-around;
-
-  & div {
-    display: contents;
-  }
+  position: absolute;
+  right: 10px;
+  top: -15px;
 `
+
+const DeleteBtnWrapper = styled.div`
+  color: white;
+  width: 40px;
+  height: 40px;
+  background: red;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+`
+
 export const Link = styled(RouterLink)`
- color: white;
-  font-size: 20px;
-  
+  text-decoration: none;
 `
 
+const BtnWrapper = styled.div`
+  width: 25px;
+  height: 25px;
+`
+
+const EditBtnWrapper = styled.div`
+  width: 40px;
+  height: 40px;
+  background: #598d19;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+`
 
 
 const FilmPageInfo = ({movie}) => {
@@ -122,7 +152,7 @@ const FilmPageInfo = ({movie}) => {
     const movies: IMovie[] = useSelector((state: any) => state.moviesList)
     const isAuthorized: IMovie[] = useSelector((state: any) => state.moviesList.isAuthorized)
     const isActiveModalWindow: IMovie[] = useSelector((state: any) => state.isActiveModalWindow)
-    console.log('isActive',isActiveModalWindow)
+    console.log('isActive', isActiveModalWindow)
     const dispatch = useDispatch()
     const history = createBrowserHistory();
     console.log('history', history)
@@ -132,73 +162,28 @@ const FilmPageInfo = ({movie}) => {
     // закоментиррвала
     const [editModalActive, setEditModalActive] = useState(false)
 
-    // const currentFunction = (values) => {
-    //    editMovie(values)
-    // }
-
     const currentFunction = (values) => {
-        //разкоментировать!!!!!!!*/}
-       // dispatch(editMovie(value))*/}
-      dispatch(editMovie(values))
-   }
-    {/*закоментировада*/}
+        dispatch(editMovie(values))
+    }
 
     return (
-
-
         <PageWrapper>
-            <NavigationWrapper>
-                <Navigation/>
-
-                {/*закоментировада*/}
-
-                    <div>
-                        {isAdmin && <button  onClick={() => setEditModalActive(true) }>Edit Film</button>}
-
-                    </div>
-
-
-
-
-            </NavigationWrapper>
+            <Navigation/>
 
             <FilmInfoWrapper>
-
-                {/*{*/}
-                {/*    editModalActive &&*/}
-                {/*    // <ModalWindow currentButton='Edit'   date={movie} active={editModalActive} />*/}
-                {/*    <EditWindow  currentButton='Edit'   date={movie} handleClose={() => setEditModalActive(false)}*/}
-
-                {/*    />*/}
-
-
-                {/*}*/}
-
-
-                {isAdmin &&
-
-                <Link to={PATHS.MAIN}
-                      onClick={() => dispatch(removeMovie(movie.id))}
-                >
-                    X
-                </Link>
-
-                }
                 <ImageWrapper>
                     <Image src={movie.image}/>
+
                     {isAuthorized &&
                     <div>
-                        <button onClick={() => dispatch(likedFilm(movie.id))}>{movie.isLiked ? 'Liked' : 'like'}</button>
+                        <button
+                            onClick={() => dispatch(likedFilm(movie.id))}>{movie.isLiked ? 'Liked' : 'like'}</button>
 
-                        <button onClick={() => dispatch(watchLateFilm(movie.id))}>{movie.isWatchLate ? 'Watched late' : 'Watch late'}</button>
-
+                        <button
+                            onClick={() => dispatch(watchLateFilm(movie.id))}>{movie.isWatchLate ? 'Watched late' : 'Watch late'}</button>
                     </div>
-
                     }
                 </ImageWrapper>
-
-
-
 
                 <FilmInfo>
                     <MovieName>{movie.name}</MovieName>
@@ -206,6 +191,28 @@ const FilmPageInfo = ({movie}) => {
                     <MovieGenre>Genre: {movie.genre}</MovieGenre>
                     <MovieDirected>Directed by: {movie.director}</MovieDirected>
                 </FilmInfo>
+
+                {isAdmin &&
+                <ButtonsWrapper>
+                    <EditBtnWrapper>
+                        <BtnWrapper>
+                            <img
+                                src={editImg}
+                                alt='editBtn'
+                                onClick={() => setEditModalActive(true)}
+                            />
+                        </BtnWrapper>
+                    </EditBtnWrapper>
+
+                    <DeleteBtnWrapper>
+                        <Link to={PATHS.MAIN} onClick={() => dispatch(removeMovie(movie.id))}>
+                            <img title='delete film' src={deleteImg}/>
+                        </Link>
+                    </DeleteBtnWrapper>
+
+                </ButtonsWrapper>
+                }
+
             </FilmInfoWrapper>
             <MovieDescription>{movie.description}</MovieDescription>
 
@@ -220,8 +227,6 @@ const FilmPageInfo = ({movie}) => {
 
             </MovieVideo>
 
-
-         {/*/!*ТУТ*!//////////////////////////////////////////////////////////////*/}
             {
                 editModalActive &&
                 <ModalWindow
@@ -231,8 +236,6 @@ const FilmPageInfo = ({movie}) => {
                     handleClose={() => setEditModalActive(false)}
                 />
             }
-
-
 
         </PageWrapper>
     );

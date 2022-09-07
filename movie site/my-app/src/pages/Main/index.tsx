@@ -25,7 +25,13 @@ const Wrapper = styled.div`
       flex-wrap: wrap;
       // срабатівает в навигации margin: 20px;
       justify-content: center;
+      //margin: auto;
     }
+  }
+  
+  ul {
+    display: flex;
+    justify-content: center;
   }
 `
 

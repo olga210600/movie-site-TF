@@ -8,6 +8,7 @@
     height: 100%;
     background-image: url("img/fern-leaves-on-dark-background-in-jungle-dense-dark-green-fern-leaves-in-garden-at-night-nature-abstract-background-fern-at-tropical-forest-exotic-plant_33867-774.jpg");
     /*background: black;*/
+    width: 100%;
     margin: 0 ;
     padding: 0;
     display: flex;

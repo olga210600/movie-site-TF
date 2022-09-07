@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import {Link as RouterLink} from 'react-router-dom';
 import {IMovie} from "../../store/reducers/moviesReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {removeMovie, likedFilm, watchLateFilm} from '../../store/reducers/moviesReducer'
@@ -10,19 +10,26 @@ import {LinkWrapper, PATHS} from "../RouterNavigation";
 
 
 const PostWrapper = styled.div`
-  width: 200px;
-  height: 350px;
+  width: 240px;
+  height: 370px;
   margin: 20px;
   cursor: pointer;
+  background: #4c4848;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+
 `
 
 
 const MovieName = styled.p`
   color: #b8b6b6;
   height: 50px;
+  width: 230px;
   font-size: 18px;
   text-align: center;
   font-weight: bold;
+  justify-content: center;
   //text-decoration: none;
   cursor: pointer;
   line-height: 1.5;
@@ -35,11 +42,13 @@ const MovieName = styled.p`
 
 
 
+
 `
 const MovieImgWrapper = styled.div`
   width: 200px;
   height: 300px;
   cursor: pointer;
+  margin: auto;
 
 `
 const MovieImg = styled.img`
@@ -50,6 +59,26 @@ const MovieImg = styled.img`
 
 `
 
+const CloseBtn = styled.button`
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: white;
+  background: red;
+  font-size: 15px;
+  border: none;
+  position: absolute;
+  left: 238px;
+  top: -16px;
+`
+
+
+export const Link = styled(RouterLink)`
+  && {
+    text-decoration: none;
+  }
+`;
+
 
 const Post = ({movie, filmId}: any) => {
     const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
@@ -59,34 +88,33 @@ const Post = ({movie, filmId}: any) => {
 
     return (
         <div>
-            {isAdmin &&
-            <div>
-                <button onClick={() => dispatch(removeMovie(movie.id))}>x</button>
-            </div>
-            }
-
-
 
             {isAuthorized &&
-                <div>
-                    <button onClick={() => dispatch(likedFilm(movie.id))}>{movie.isLiked ? 'Liked' : 'like'}</button>
+            <div>
+                <button
+                    onClick={() => dispatch(likedFilm(movie.id))}>{movie.isLiked ? 'Liked' : 'like'}
+                </button>
 
-                    <button onClick={() => dispatch(watchLateFilm(movie.id))}>{movie.isWatchLate ? 'Watched late' : 'Watch late'}</button>
-
-                 </div>
+                <button
+                    onClick={() => dispatch(watchLateFilm(movie.id))}>{movie.isWatchLate ? 'Watched late' : 'Watch late'}
+                </button>
+            </div>
 
             }
-            {/*<Link to={{pathname: `/movie-details?filmId=${filmId}`}}>*/}
-            <Link to={{pathname: `/movie-details?filmId=${filmId}`}}>
-                <PostWrapper>
+            <PostWrapper>
 
+                {isAdmin &&
+                <CloseBtn onClick={() => dispatch(removeMovie(movie.id))}>&#10006;</CloseBtn>
+                }
+
+                <Link to={{pathname: `/movie-details?filmId=${filmId}`}}>
                     <MovieName>{movie.name}</MovieName>
                     <MovieImgWrapper>
                         <MovieImg className='movie-img' src={movie.image}/>
                     </MovieImgWrapper>
+                </Link>
+            </PostWrapper>
 
-                </PostWrapper>
-            </Link>
 
         </div>
 
