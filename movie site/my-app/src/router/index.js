@@ -36,7 +36,6 @@ const withNavigation = (Component, data = {}, options = {}) => {
 };
 
 const PublicRoutes = () => {
-
     return (
         <BrowserRouter>
             <Routes>
