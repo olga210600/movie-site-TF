@@ -17,18 +17,21 @@ import {createBrowserHistory} from "history";
 import deleteImg from '../../img/delete-svgrepo-com.svg'
 // @ts-ignore
 import editImg from '../../img/edit-svgrepo-com.svg'
+// @ts-ignore
+import HeaderImgPost from "../../img/interstellar-movie-movies-astronaut-sea-wallpaper-preview.jpg";
 
 
 const PageWrapper = styled.div`
-  width: 63%;
-  min-width: 750px;
+  width: 100%;
+  //min-width: 750px;
   height: 100%;
-  background: #2b2a2a;
+  //background: #2b2a2a;
   box-sizing: border-box;
-  margin: 70px 0 70px 0;
+  //margin: 70px 0 70px 0;
   font-family: sans-serif;
   padding-bottom: 20px;
   justify-content: center;
+  margin: 0;
 `
 
 const FilmInfoWrapper = styled.div`
@@ -146,6 +149,25 @@ const EditBtnWrapper = styled.div`
   margin-right: 10px;
 `
 
+const UserBtnWrapper = styled.div`
+    background: orange;
+  width: 50px;
+  height: 80px;
+  
+`
+
+const HeaderWrapper = styled.div`
+  height: 380px;
+  position: relative;
+  color: white;
+`
+const HeaderImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+`
+
 
 const FilmPageInfo = ({movie}) => {
     const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
@@ -168,20 +190,23 @@ const FilmPageInfo = ({movie}) => {
 
     return (
         <PageWrapper>
-            <Navigation/>
+            <HeaderWrapper>
+                <Navigation/>
+                <HeaderImg src={HeaderImgPost}/>
+            </HeaderWrapper>
 
             <FilmInfoWrapper>
                 <ImageWrapper>
                     <Image src={movie.image}/>
 
                     {isAuthorized &&
-                    <div>
+                    <UserBtnWrapper>
                         <button
                             onClick={() => dispatch(likedFilm(movie.id))}>{movie.isLiked ? 'Liked' : 'like'}</button>
 
                         <button
                             onClick={() => dispatch(watchLateFilm(movie.id))}>{movie.isWatchLate ? 'Watched late' : 'Watch late'}</button>
-                    </div>
+                    </UserBtnWrapper>
                     }
                 </ImageWrapper>
 

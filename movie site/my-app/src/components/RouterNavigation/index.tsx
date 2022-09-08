@@ -1,26 +1,57 @@
-import React, {useState} from "react";
+import React from "react";
 import {createBrowserHistory} from "history";
 import styled from "styled-components";
 import {Link as RouterLink} from "react-router-dom";
-import {Form} from "formik";
 import {IMovie} from "../../store/reducers/moviesReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {logOut} from '../../store/reducers/moviesReducer'
-import EditWindow from "../ModalWindow";
+import './style.css'
 // @ts-ignore
 
 import add from '../../img/add-tool-svgrepo-com.svg'
+// @ts-ignore
 
 export const Wrapper = styled.div`
+  display: flex;
+  //margin:auto ;
+  //width: 90%;
+  //height: 50px;
+  height: 380px;
+  //background: rebeccapurple;
+  //justify-content: space-between;
+  
+  
 
   & nav {
     display: flex;
-    margin: 0;
+    margin: 0 ;
     justify-content: right;
-   
+    width: 70%;
+    //max-width: 600px;
+    
+    //min-width: 500px;
+    height: 50px;
+    align-items: center;
+    //background: darkgrey;
+    
+    //justify-content: space-around;
   }
 `
 
+
+
+const LogoNameWrapper = styled.div`
+  width: 30%;
+  min-width: 330px;
+  //background: grey;
+  //margin-left: 5px;
+  
+`
+
+const LogoName = styled.h1`
+  font-family: 'Teko', Arial, sans-serif;
+  font-size: 50px;
+`
 
 export const LinkWrapper = styled.div`
   display: flex;
@@ -29,61 +60,77 @@ export const LinkWrapper = styled.div`
 
 export const SelectWrapper = styled.div`
   display: flex;
-  margin-left: 25px;
   margin-right: 25px;
+
+
+  && select {
+    margin-left: 7px;
+    border-radius: 5px;
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    background: none;
+    color: white;
+    font-size: 14px;
+  }
+
+  && option {
+    color: white;
+    background: #1b1b2b ;
+  }
 `
 
 export const RegistrationWrapper = styled.div`
-  //margin-right: 30px;
-  //display: flex;
-  //align-items: center;
+  display: flex;
+  align-items: center;
+  //padding-top: 13px;
 `
 
-export const MovieCategory = styled.div`
-  //
-  //
-`
 
-const LogInWrapper = styled.div`
-//margin-top: 4px;
+const LogInOutWrapper = styled.div`
+  width: 80px;
+
 `
 
 export const Link = styled(RouterLink)`
   text-decoration: none;
+
   && {
-      //color: ${({isActive}) => (isActive ? "#000000" : "black")};
-    //text-decoration:  ${({isActive}) => (isActive ? "underline" : "none")};;
-    color: ${({isActive}) => (isActive ? "pink" : "black")};
-    //padding:5px;
-    //
+    text-decoration: ${({isActive}) => (isActive ? "underline red" : "none")};
+    color: ${({isActive}) => (isActive ? "white" : "white")};
+    margin-right: 15px;
+    
+    ///////
+    padding: 5px;
+
     :hover {
-      color: grey;
+      //color: #564949;
+      //font-weight: bold;
+      background: grey;
+      //height: 30px;
+      padding: 5px;
+      border-radius: 5px;
     }
   }
 `;
 
 
 const AddBtn = styled.button`
-  //border: none;
-  //background: #ffffff;
-  ////font-size: 17px;
-  //padding: 5px;
-  //border: none;
-  font-size: 19px;
-  margin-right: 25px;
+  font-size: 16px;
+  width: 100px;
+  height: 30px;
+  margin-right: 15px;
   border: none;
-  background: none;
+  background: #69696d;
   color: white;
-  
-  //margin-top: 4px;
+  border-radius: 5px;
 
 
   && {
-    //background: ${({isActive}) => (isActive ? "darkgrey" : "white")};
-    //color: ${({isActive}) => (isActive ? "grey" : "black")};
+      //background: ${({isActive}) => (isActive ? "darkgrey" : "white")};
+      //color: ${({isActive}) => (isActive ? "grey" : "black")};
     //border-radius: 5px;
-    //cursor: ${({isActive}) => (isActive ? "none" : "pointer")};
-
+      //cursor: ${({isActive}) => (isActive ? "none" : "pointer")};
 
   }
 
@@ -92,23 +139,33 @@ const AddBtn = styled.button`
   }
 `
 
+const UserFilmWrapper = styled.div`
+  color: white;
+  display: flex;
+  
+  //width: 300px;
+  //background: blue;
+  
+`
+
+const WatchLateFilmsWrapper = styled.div`
+  width: 140px;
+  box-sizing: border-box;
+`
+
+const LikedFilmsWrapper = styled.div`
+  width: 98px;
+  box-sizing: border-box;
+`
+
+
+
 export const PATHS = {
     MAIN: "/",
-
     REGISTRATION_FORM: "/registration-form",
     LIKED_MOVIE_PAGE: '/liked-movies',
     WATCH_LATE_MOVIE_PAGE: '/watch-late-movies'
-    //////////////////////////////////
-    // SIMPLE_FORM: "/simple-form",
-    // ESSENTIAL_FORM: "/essential-form",
-
-
-    // Registration_FORM: "/advanced-form",
 };
-
-const log = (i, d) => {
-    console.log(i === d)
-}
 
 const Navigation = ({setAddModalActive, handleCategoryChange}: any) => {
     const history = createBrowserHistory();
@@ -122,10 +179,12 @@ const Navigation = ({setAddModalActive, handleCategoryChange}: any) => {
     const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
     const dispatch = useDispatch()
 
-    const [editModalActive, setEditModalActive] = useState(false)
-
     return (
         <Wrapper>
+
+            <LogoNameWrapper>
+                <LogoName>GalacticFilms</LogoName>
+            </LogoNameWrapper>
             <nav>
 
                 <LinkWrapper>
@@ -133,102 +192,73 @@ const Navigation = ({setAddModalActive, handleCategoryChange}: any) => {
                         Main page
                     </Link>
 
-
                     <SelectWrapper>
-                        <MovieCategory>Filter by Category:</MovieCategory>
-                        <div>
-                            <select
-                                name="category-list"
-                                id="category-list"
-                                onChange={handleCategoryChange}
-                            >
-                                <option value="">All genres</option>
-                                <option value="action movie">Action movie</option>
-                                <option value="comedy">Comedy</option>
-                            </select>
-                        </div>
+                        <select
+                            name="category-list"
+                            id="category-list"
+                            onChange={handleCategoryChange}
+                        >
+                            <option value="">All genres of films</option>
+                            <option value="action movie">Action movie</option>
+                            <option value="comedy">Comedy</option>
+                        </select>
+
                     </SelectWrapper>
                 </LinkWrapper>
 
-                {/*{*/}
-                {/*    isAdmin &&*/}
-                {/*    <button  onClick={() => setEditModalActive(true)}>Create new film</button>*/}
-                {/*}*/}
-                {/*{*/}
-                {/*    editModalActive &&*/}
-                {/*    // <ModalWindow currentButton='Edit'   date={movie} active={editModalActive} />*/}
-                {/*    <EditWindow  currentButton='Edit'   date={movies} handleClose={() => setEditModalActive(false)}*/}
-
-                {/*    />*/}
-
-
-                {/*}*/}
                 <div>
 
                     {
                         isUser &&
-                        <div>
-                            <Link isActive={currentPage === PATHS.LIKED_MOVIE_PAGE} to={PATHS.LIKED_MOVIE_PAGE}>
-                                Liked Film
-                            </Link>
-                            <Link isActive={currentPage === PATHS.WATCH_LATE_MOVIE_PAGE}
-                                  to={PATHS.WATCH_LATE_MOVIE_PAGE}>
-                                Watch Late Film
-                            </Link>
+                        <UserFilmWrapper>
+                            <LikedFilmsWrapper>
+                                <Link isActive={currentPage === PATHS.LIKED_MOVIE_PAGE} to={PATHS.LIKED_MOVIE_PAGE}>
+                                    Liked Film
+                                </Link>
+                            </LikedFilmsWrapper>
 
-                        </div>
+                            <WatchLateFilmsWrapper>
+                                <Link isActive={currentPage === PATHS.WATCH_LATE_MOVIE_PAGE}
+                                      to={PATHS.WATCH_LATE_MOVIE_PAGE}>
+                                    Watch Late Film
+                                </Link>
+                            </WatchLateFilmsWrapper>
+
+
+                        </UserFilmWrapper>
 
                     }
                 </div>
 
-                {/*add film*/}
-                {/*{ isAdmin &&*/}
-                {/*// <img src={add}  onClick={() => setAddModalActive(true) }/>*/}
-                {/*<AddBtn onClick={() => setAddModalActive(true) }>Create new Film</AddBtn>*/}
-
-                {/*}*/}
-
 
                 <RegistrationWrapper>
                     {isAdmin &&
-                    <AddBtn isActive={currentPage === '/movie-details'} onClick={() => setAddModalActive(true)}>Create new Film</AddBtn>
+                    <AddBtn isActive={currentPage === '/movie-details'} onClick={() => setAddModalActive(true)}>
+                        Add Film</AddBtn>
                     }
 
                     {!isAdmin && !isUser ?
-                        <LogInWrapper>
+                        <LogInOutWrapper>
                             <Link
                                 isActive={currentPage === PATHS.REGISTRATION_FORM}
                                 to={PATHS.REGISTRATION_FORM}
                             >
                                 Log in
                             </Link>
-                        </LogInWrapper>
-
+                        </LogInOutWrapper>
                         :
-                        <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}
-                              onClick={() => dispatch(logOut(movies))}>
-                            Log out
-                        </Link>
+                        <LogInOutWrapper>
+                            <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}
+                                  onClick={() => dispatch(logOut(movies))}>
+                                Log out
+                            </Link>
+                        </LogInOutWrapper>
+
+
                     }
                 </RegistrationWrapper>
-
-
             </nav>
-
-
-            {/*add film*/}
-            {/*{*/}
-            {/*    editModalActive &&*/}
-            {/*    // <ModalWindow currentButton='Edit'   date={movie} active={editModalActive} />*/}
-            {/*    <EditWindow  currentButton='Edit'   date={movies} handleClose={() => setEditModalActive(false)}*/}
-
-            {/*    />*/}
-
-
-            {/*}*/}
         </Wrapper>
-
-
     );
 };
 

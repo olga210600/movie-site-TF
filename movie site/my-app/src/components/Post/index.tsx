@@ -5,17 +5,20 @@ import {IMovie} from "../../store/reducers/moviesReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {removeMovie, likedFilm, watchLateFilm} from '../../store/reducers/moviesReducer'
 import cloneDeep from 'lodash/cloneDeep'
+// // @ts-ignore
+// import likeImg from '../../img/like-svgrepo-com.svg'
+// // @ts-ignore
+// import likedImg from '../../img/likedd-svgrepo-com (2).svg'
 
 import {LinkWrapper, PATHS} from "../RouterNavigation";
+import WatchLateFilmPage from "../../pages/WatchLateFilmPage";
 
 
 const PostWrapper = styled.div`
-  width: 240px;
-  height: 370px;
+  width: 200px;
+  height: 440px;
   margin: 20px;
   cursor: pointer;
-  background: #4c4848;
-  padding: 10px;
   border-radius: 5px;
   position: relative;
 
@@ -24,26 +27,22 @@ const PostWrapper = styled.div`
 
 const MovieName = styled.p`
   color: #b8b6b6;
-  height: 50px;
-  width: 230px;
-  font-size: 18px;
+  height: 70px;
+  //background: orange;
+  width: 200px;
+  font-size: 16px;
   text-align: center;
   font-weight: bold;
   justify-content: center;
   //text-decoration: none;
+  margin-top: 5px;
   cursor: pointer;
   line-height: 1.5;
   margin-bottom: 15px;
   align-items: center;
   display: flex;
-
-
-
-
-
-
-
 `
+
 const MovieImgWrapper = styled.div`
   width: 200px;
   height: 300px;
@@ -55,6 +54,7 @@ const MovieImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 5px;
   cursor: pointer;
 
 `
@@ -68,10 +68,45 @@ const CloseBtn = styled.button`
   font-size: 15px;
   border: none;
   position: absolute;
-  left: 238px;
-  top: -16px;
+  left: 183px;
+  top: -18px;
 `
 
+const ButtonsWrapper = styled.div`
+  width: 100%;
+  height: 25px;
+  //background: orange;
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+`
+const WatchLateBtnWrapper = styled.div`
+  width: 90px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  background: #33333e;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+`
+
+const LikedBtnWrapper = styled.div`
+  width: 90px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background: #33333e;
+  color: white;
+  margin-right: 12px;
+  border-radius: 5px;
+
+
+  //  width: 30px;
+  //  height: 30px;
+`
 
 export const Link = styled(RouterLink)`
   && {
@@ -89,30 +124,41 @@ const Post = ({movie, filmId}: any) => {
     return (
         <div>
 
-            {isAuthorized &&
-            <div>
-                <button
-                    onClick={() => dispatch(likedFilm(movie.id))}>{movie.isLiked ? 'Liked' : 'like'}
-                </button>
 
-                <button
-                    onClick={() => dispatch(watchLateFilm(movie.id))}>{movie.isWatchLate ? 'Watched late' : 'Watch late'}
-                </button>
-            </div>
-
-            }
-            <PostWrapper>
+            <PostWrapper >
 
                 {isAdmin &&
                 <CloseBtn onClick={() => dispatch(removeMovie(movie.id))}>&#10006;</CloseBtn>
                 }
 
                 <Link to={{pathname: `/movie-details?filmId=${filmId}`}}>
-                    <MovieName>{movie.name}</MovieName>
+
                     <MovieImgWrapper>
                         <MovieImg className='movie-img' src={movie.image}/>
                     </MovieImgWrapper>
+
+
+                    <MovieName>{movie.name}</MovieName>
                 </Link>
+
+                {isAuthorized &&
+                <ButtonsWrapper>
+                    <LikedBtnWrapper
+                        onClick={() => dispatch(likedFilm(movie.id))}>{movie.isLiked ? 'Liked' : 'Like'}
+                        {/*// onClick={() => dispatch(likedFilm(movie.id))}>*/}
+                        {/*// {movie.isLiked ?*/}
+                        {/*//     <img src={likedImg}/>*/}
+                        {/*//     :*/}
+                        {/*//     <img src={likeImg}/>*/}
+                        {/*// }*/}
+                    </LikedBtnWrapper>
+
+                    <WatchLateBtnWrapper
+                        onClick={() => dispatch(watchLateFilm(movie.id))}>{movie.isWatchLate ? 'Watched late' : 'Watch late'}
+                    </WatchLateBtnWrapper>
+                </ButtonsWrapper>
+
+                }
             </PostWrapper>
 
 

@@ -10,59 +10,69 @@ import {selectedFilms} from '../../store/reducers/moviesReducer'
 import ImageSlider from "../../components/ImageSlider";
 import Post from "../../components/Post";
 import ModalWindow from "../../components/ModalWindow";
-// import headerImg from "../../img/1640212391_5-abrakadabra-fun-p-fon-listya-paporotnika-5.jpg"
+// @ts-ignore
+import HeaderImgPost from "../../img/interstellar-movie-movies-astronaut-sea-wallpaper-preview.jpg"
 
 
 const Wrapper = styled.div`
-  
-  background: #2b2a2a;
+
+  background: #1f1e1e;
   box-sizing: border-box;
- 
+  padding-bottom: 50px;
+
 
   & div {
     & div {
       flex-wrap: wrap;
-      // срабатівает в навигации margin: 20px;
       justify-content: center;
-      //margin: auto;
     }
   }
-  
+
   ul {
     display: flex;
     justify-content: center;
+ 
+
+
+    
   }
+  
+  
 `
 
 const HeaderWrapper = styled.div`
-  height: 450px;
+  height: 380px;
   position: relative;
-  //display: flex;
-  font-size: 19px;
-  //padding-right: 15px;
   color: white;
 `
 
 const HeaderImg = styled.img`
-width: 100%;
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.4;
-  //background-color:rgba(0,0,0,.5);
-
+  opacity: 0.5;
 `
 
 const HeaderLink = styled.div`
   width: 100%;
   height: 40px;
-  margin-top: 40px;
-  //background: white;
-position: absolute;
+  margin-top: 15px;
+  position: absolute;
   top: 0;
   padding-right: 50px;
+  padding-left: 50px;
   box-sizing: border-box;
   //display: flex;
-  
+
+`
+
+const FilmsWrapper = styled.div`
+  //background: green;
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  min-width: 800px;
+  padding-top: 50px;
 `
 
 
@@ -70,7 +80,7 @@ const Main = () => {
     const movies: IMovie[] = useSelector((state: any) => state.moviesList.defaultData)
     const filteredList: IMovie[] = useSelector((state: any) => state.moviesList.filteredMovies)
     const dispatch = useDispatch()
-    const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
+    // const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
     const [addModalActive, setAddModalActive] = useState(false)
 
 
@@ -80,17 +90,13 @@ const Main = () => {
     }
 
     const currentFunction = (values) => {
-        //разкоментировать!!!!!!!
-        // dispatch(editMovie(value))
         dispatch(addNewMovie(values))
     }
 
     return (
         <Wrapper>
             <HeaderWrapper>
-                <HeaderImg src={"https://p4.wallpaperbetter.com/wallpaper/527/320/1017/interstellar-movie-movies-astronaut-sea-wallpaper-preview.jpg"}/>
-                {/*<img src={}/>*/}
-
+                <HeaderImg src={HeaderImgPost}/>
                 <HeaderLink>
                     <PageHeader setAddModalActive={setAddModalActive} handleCategoryChange={handleCategoryChange}/>
 
@@ -109,16 +115,19 @@ const Main = () => {
 
             {/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!слфйдер*/}
             {/*<ImageSlider movies={movies}/>*/}
-{/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/}
+            {/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/}
 
-            <PaginationList
-                data={filteredList}
-                pageSize={9}
-                layout={"row"}
-                renderItem={(item, key) => (
-                    <Post filmId={item.id} key={key} movie={item}/>
-                )}
-            />
+            <FilmsWrapper>
+                <PaginationList
+                    data={filteredList}
+                    pageSize={9}
+                    layout={"row"}
+                    renderItem={(item, key) => (
+                        <Post filmId={item.id} key={key} movie={item}/>
+                    )}
+                />
+            </FilmsWrapper>
+
         </Wrapper>
     );
 };
