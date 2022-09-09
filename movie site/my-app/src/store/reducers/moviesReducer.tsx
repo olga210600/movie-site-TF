@@ -60,7 +60,7 @@ const moviesSlice = createSlice({
                 isAdmin: true,
             }
         },
-        logOut(state, action) {
+        logOut(state) {
 
             const copiedDefaultData = cloneDeep(state.defaultData)
             const copiedFilteredMovies = cloneDeep(state.filteredMovies)

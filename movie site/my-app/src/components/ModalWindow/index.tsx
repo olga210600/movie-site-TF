@@ -4,6 +4,7 @@ import {Formik, Field, Form} from "formik";
 import {validateSchema} from "./schema";
 import {useDispatch} from "react-redux";
 import {v4 as uuidv4} from 'uuid';
+import isEmpty from 'lodash/isEmpty'
 
 const Modal = styled.div`
   height: 100vh;
@@ -41,7 +42,7 @@ const Modal = styled.div`
 const ModalContent = styled.div`
   padding: 40px 30px 30px 30px;
   border-radius: 12px;
-  background-color: #eeebeb;
+  background-color: #2b2a2a;
   width: 500px;
   //height: 410px;
   height: 550px;
@@ -58,9 +59,9 @@ const Header = styled.h1`
 const CloseBtn = styled.button`
   background: red;
   border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  //border-radius: 50px;
   position: absolute;
   color: white;
   font-size: 15px;
@@ -176,6 +177,9 @@ const CurrentBtn = styled.button`
   background: #5dba52;
   border-radius: 5px;
 
+  &:disabled {
+    background: #a2aba1;
+  }
 `
 
 const getInitialValues = (data) => ({
@@ -213,6 +217,8 @@ const ModalWindow = ({date, currentFunction, currentButton, handleClose}) => {
                             // @ts-ignore
                             // @ts-ignore
                             // @ts-ignore
+
+                            console.log('error',!!errors)
                             return (
                                 <Form>
                                     <Header>Fill in the movie fields</Header>
@@ -283,10 +289,12 @@ const ModalWindow = ({date, currentFunction, currentButton, handleClose}) => {
 
 
                                     <CurrentBtnWrapper>
-                                        <CurrentBtn
+                                        <CurrentBtn type="submit"
+                                                    disabled={!isEmpty(errors) }
                                             onClick={() => {
                                                 handleClose()
                                                 currentFunction(values)
+
                                             }}>
                                             {currentButton}
                                         </CurrentBtn>

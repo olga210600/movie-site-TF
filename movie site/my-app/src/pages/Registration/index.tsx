@@ -5,6 +5,12 @@ import {
     Wrapper,
     FormField,
     ErrorMessage,
+    PageHeader,
+    CompleteWrapper,
+    MainPageLinkWrapper,
+    LabelWrapper,
+    StarPassword,
+    StarEmail
 } from "./styles";
 import {IMovie} from "../../store/reducers/moviesReducer";
 import {useDispatch, useSelector} from "react-redux";
@@ -30,6 +36,14 @@ const EssentialForm = () => {
 
     return (
         <Wrapper>
+
+            <MainPageLinkWrapper>
+                <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}>
+                    Main page
+                </Link>
+            </MainPageLinkWrapper>
+
+
             <Formik
                 initialValues={{
                     email: "",
@@ -45,8 +59,14 @@ const EssentialForm = () => {
                     return (
                         <Form>
 
+                            <PageHeader>Registration</PageHeader>
+
                             <FormField isError={errors?.email}>
-                                <label htmlFor="email">Email</label>
+                                <LabelWrapper>
+                                   <label htmlFor="email">Email</label>
+                                    <StarEmail>*</StarEmail>
+                                </LabelWrapper>
+
                                 <Field
                                     id="email"
                                     name="email"
@@ -58,7 +78,11 @@ const EssentialForm = () => {
                             </FormField>
 
                             <FormField isError={errors?.password}>
-                                <label htmlFor="password"> Password</label>
+                                <LabelWrapper>
+                                    <label htmlFor="password"> Password</label>
+                                    <StarPassword>*</StarPassword>
+                                </LabelWrapper>
+
                                 <Field id="password" name="password" placeholder="123"
 
                                 />
@@ -70,7 +94,7 @@ const EssentialForm = () => {
 
                             {
                                 errors?.email || errors?.password ?
-                                    <div>Add Info</div> :
+                                    <CompleteWrapper>Complete all fields</CompleteWrapper> :
 
                                     <div>
                                         <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}

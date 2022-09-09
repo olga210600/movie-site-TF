@@ -24,38 +24,30 @@ import PageHeader from "../PageHeader";
 
 const PageWrapper = styled.div`
   width: 100%;
-  //min-width: 750px;
   height: 100%;
   background: #2b2a2a;
   box-sizing: border-box;
-  //margin: 70px 0 70px 0;
   font-family: sans-serif;
   padding-bottom: 20px;
   justify-content: center;
   margin: 0;
   min-width: 1200px;
-  //background: rebeccapurple;
   position: relative;
-
 `
 
-
 const HeaderFilmInfo = styled.div`
-position: absolute;
+  position: relative;
   top: 170px;
 `
 
 const FilmInfoWrapper = styled.div`
   display: flex;
   box-sizing: border-box;
-  position: relative;
-  //margin-top: 30px;
-  //min-width: 1200px;
-  //background: orange;
   justify-content: center;
-  left: 200px;
- //margin-left: 20%;
- // margin-right: 20%;
+  position: absolute;
+  top: -220px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `
 
 const FilmInfo = styled.div`
@@ -73,6 +65,7 @@ const ImageWrapper = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 100%;
+  margin-left: -58px;
 `
 
 const MovieName = styled.p`
@@ -104,7 +97,6 @@ const MovieDescription = styled.p`
   text-indent: 20px;
   font-family: sans-serif;
   line-height: 25px;
-  //margin-top: 100px;
 `
 
 const MovieVideo = styled.div`
@@ -115,24 +107,17 @@ const MovieVideo = styled.div`
   margin: 30px 0 50px 0;
 `
 
-// const NavigationWrapper = styled.div`
-//   //width: 100%;
-//   height: 50px;
-//   background: white;
+// const ButtonsWrapper = styled.div`
 //   display: flex;
-//   color: black;
-//   //justify-content: space-around;
-//
-//   & div {
-//     display: contents;
-//   }
+//   position: absolute;
+//   right: 10px;
+//   top: -15px;
 // `
-
 const ButtonsWrapper = styled.div`
   display: flex;
-  position: absolute;
-  right: 10px;
-  top: -15px;
+  //position: absolute;
+  //right: 10px;
+  //top: -15px;
 `
 
 const DeleteBtnWrapper = styled.div`
@@ -165,14 +150,14 @@ const EditBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 20px;
+  margin-left: 10px;
 `
 
 const UserBtnWrapper = styled.div`
   width: 300px;
   margin-left: 10px;
   display: flex;
-  //background: orange;
 `
 
 const LikeBtn = styled.button`
@@ -184,10 +169,9 @@ const LikeBtn = styled.button`
   border-radius: 5px;
   border: none;
   font-size: 15px;
-  
 `
 
-const WatchLateBtn= styled.button`
+const WatchLateBtn = styled.button`
   width: 120px;
   height: 30px;
   background: #33333e;
@@ -198,17 +182,17 @@ const WatchLateBtn= styled.button`
   font-size: 15px;
 `
 
-const HeaderWrapper = styled.div`
-  height: 380px;
-  position: relative;
-  color: white;
-`
-const HeaderImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.5;
-`
+// const HeaderWrapper = styled.div`
+//   height: 380px;
+//   position: relative;
+//   color: white;
+// `
+// const HeaderImg = styled.img`
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover;
+//   opacity: 0.5;
+// `
 
 
 const FilmPageInfo = ({movie}) => {
@@ -223,7 +207,6 @@ const FilmPageInfo = ({movie}) => {
 
     const currentPage = history.location.pathname;
 
-    // закоментиррвала
     const [editModalActive, setEditModalActive] = useState(false)
 
     const currentFunction = (values) => {
@@ -264,31 +247,32 @@ const FilmPageInfo = ({movie}) => {
                         </UserBtnWrapper>
                         }
 
+
+                        {isAdmin &&
+                        <ButtonsWrapper>
+                            <EditBtnWrapper>
+                                <BtnWrapper>
+                                    <img
+                                        src={editImg}
+                                        alt='editBtn'
+                                        onClick={() => setEditModalActive(true)}
+                                    />
+                                </BtnWrapper>
+                            </EditBtnWrapper>
+
+                            <DeleteBtnWrapper>
+                                <Link to={PATHS.MAIN} onClick={() => dispatch(removeMovie(movie.id))}>
+                                    <img title='delete film' src={deleteImg}/>
+                                </Link>
+                            </DeleteBtnWrapper>
+
+                        </ButtonsWrapper>
+                        }
+
                     </FilmInfo>
 
 
 
-
-                    {isAdmin &&
-                    <ButtonsWrapper>
-                        <EditBtnWrapper>
-                            <BtnWrapper>
-                                <img
-                                    src={editImg}
-                                    alt='editBtn'
-                                    onClick={() => setEditModalActive(true)}
-                                />
-                            </BtnWrapper>
-                        </EditBtnWrapper>
-
-                        <DeleteBtnWrapper>
-                            <Link to={PATHS.MAIN} onClick={() => dispatch(removeMovie(movie.id))}>
-                                <img title='delete film' src={deleteImg}/>
-                            </Link>
-                        </DeleteBtnWrapper>
-
-                    </ButtonsWrapper>
-                    }
 
                 </FilmInfoWrapper>
             </HeaderFilmInfo>

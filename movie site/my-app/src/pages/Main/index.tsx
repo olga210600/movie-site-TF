@@ -18,7 +18,8 @@ import ModalWindow from "../../components/ModalWindow";
 
 const Wrapper = styled.div`
 
-  background: #1f1e1e;
+  //background: #1f1e1e;
+  background: #2b2a2a;
   box-sizing: border-box;
   padding-bottom: 50px;
   min-width: 1200px;
@@ -74,7 +75,7 @@ const HeaderLink = styled.div`
 const FilmsWrapper = styled.div`
   //background: green;
   width: 90%;
-  min-width: 1200px;
+  max-width: 1200px;
   margin: auto;
   //min-width: 800px;
   padding-top: 50px;

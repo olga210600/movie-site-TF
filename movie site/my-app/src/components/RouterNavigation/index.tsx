@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {createBrowserHistory} from "history";
 import styled from "styled-components";
 import {Link as RouterLink} from "react-router-dom";
@@ -233,9 +233,36 @@ const Navigation = ({setAddModalActive, handleCategoryChange}: any) => {
     const currentPage = history.location.pathname;
     console.log('currentPage', typeof (currentPage))
 
-    const movies: IMovie[] = useSelector((state: any) => state.moviesList)
-    const isUser: IMovie[] = useSelector((state: any) => state.moviesList.isAuthorized)
-    const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
+    const movies: IMovie[] = useSelector((state: any) => state.moviesList.defaultData)
+    const isUser: boolean = useSelector((state: any) => state.moviesList.isAuthorized)
+    const isAdmin: boolean = useSelector((state: any) => state.moviesList.isAdmin)
+
+
+    console.log('movies: ', movies)
+
+    // const likedMovies = movies.map((movie) => {
+    //     if (movie.isLiked) {
+    //         return movie
+    //     }
+    // })
+
+    const likedMovies = movies.reduce((acc: IMovie[], movie: IMovie): IMovie[] => {
+        if (movie.isLiked) {
+            acc.push(movie)
+        }
+
+        return acc
+    }, [])
+
+    const watchedLateMovies = movies.reduce((acc: IMovie[], movie: IMovie): IMovie[] => {
+        if (movie.isWatchLate) {
+            acc.push(movie)
+        }
+
+        return acc
+    }, [])
+
+    console.log('likedMovies: ', likedMovies)
     const dispatch = useDispatch()
 
     return (
@@ -274,19 +301,22 @@ const Navigation = ({setAddModalActive, handleCategoryChange}: any) => {
                         {
                             isUser &&
                             <UserFilmWrapper>
-                                <LikedFilmsWrapper>
-                                    <Link isActive={currentPage === PATHS.LIKED_MOVIE_PAGE} to={PATHS.LIKED_MOVIE_PAGE}>
-                                        Liked Film
-                                    </Link>
-                                </LikedFilmsWrapper>
+                                {!!likedMovies.length && (
+                                    <LikedFilmsWrapper>
+                                        <Link isActive={currentPage === PATHS.LIKED_MOVIE_PAGE} to={PATHS.LIKED_MOVIE_PAGE}>
+                                            Liked Film
+                                        </Link>
+                                    </LikedFilmsWrapper>
+                                )}
 
+                                {!!watchedLateMovies.length && (
                                 <WatchLateFilmsWrapper>
                                     <Link isActive={currentPage === PATHS.WATCH_LATE_MOVIE_PAGE}
                                           to={PATHS.WATCH_LATE_MOVIE_PAGE}>
                                         Watch Late Film
                                     </Link>
                                 </WatchLateFilmsWrapper>
-
+                                )}
 
                             </UserFilmWrapper>
 
@@ -312,7 +342,7 @@ const Navigation = ({setAddModalActive, handleCategoryChange}: any) => {
                             :
                             <LogInOutWrapper>
                                 <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}
-                                      onClick={() => dispatch(logOut(movies))}>
+                                      onClick={() => dispatch(logOut())}>
                                     Log out
                                 </Link>
                             </LogInOutWrapper>
