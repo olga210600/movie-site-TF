@@ -145,12 +145,6 @@ const Post = ({movie, filmId}: any) => {
                 <ButtonsWrapper>
                     <LikedBtnWrapper
                         onClick={() => dispatch(likedFilm(movie.id))}>{movie.isLiked ? 'Liked' : 'Like'}
-                        {/*// onClick={() => dispatch(likedFilm(movie.id))}>*/}
-                        {/*// {movie.isLiked ?*/}
-                        {/*//     <img src={likedImg}/>*/}
-                        {/*//     :*/}
-                        {/*//     <img src={likeImg}/>*/}
-                        {/*// }*/}
                     </LikedBtnWrapper>
 
                     <WatchLateBtnWrapper

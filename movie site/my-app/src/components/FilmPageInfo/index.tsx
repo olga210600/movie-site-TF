@@ -19,26 +19,43 @@ import deleteImg from '../../img/delete-svgrepo-com.svg'
 import editImg from '../../img/edit-svgrepo-com.svg'
 // @ts-ignore
 import HeaderImgPost from "../../img/interstellar-movie-movies-astronaut-sea-wallpaper-preview.jpg";
+import PageHeader from "../PageHeader";
 
 
 const PageWrapper = styled.div`
   width: 100%;
   //min-width: 750px;
   height: 100%;
-  //background: #2b2a2a;
+  background: #2b2a2a;
   box-sizing: border-box;
   //margin: 70px 0 70px 0;
   font-family: sans-serif;
   padding-bottom: 20px;
   justify-content: center;
   margin: 0;
+  min-width: 1200px;
+  //background: rebeccapurple;
+  position: relative;
+
+`
+
+
+const HeaderFilmInfo = styled.div`
+position: absolute;
+  top: 170px;
 `
 
 const FilmInfoWrapper = styled.div`
   display: flex;
   box-sizing: border-box;
   position: relative;
-  margin-top: 30px;
+  //margin-top: 30px;
+  //min-width: 1200px;
+  //background: orange;
+  justify-content: center;
+  left: 200px;
+ //margin-left: 20%;
+ // margin-right: 20%;
 `
 
 const FilmInfo = styled.div`
@@ -48,10 +65,10 @@ const FilmInfo = styled.div`
 `
 
 const ImageWrapper = styled.div`
-  width: 300px;
-  height: 400px;
+  width: 250px;
+  height: 350px;
   margin: 40px 20px 40px 76px;
-  object-fit: cover;
+  object-fit: contain;
 `
 const Image = styled.img`
   width: 100%;
@@ -80,12 +97,14 @@ const MovieDirected = styled.p`
 
 const MovieDescription = styled.p`
   font-size: 17px;
-  color: white;
+  color: #8c8686;
   width: 600px;
-  margin: auto;
+  margin: 200px auto 0;
   text-align: justify;
   text-indent: 20px;
   font-family: sans-serif;
+  line-height: 25px;
+  //margin-top: 100px;
 `
 
 const MovieVideo = styled.div`
@@ -150,10 +169,33 @@ const EditBtnWrapper = styled.div`
 `
 
 const UserBtnWrapper = styled.div`
-    background: orange;
-  width: 50px;
-  height: 80px;
+  width: 300px;
+  margin-left: 10px;
+  display: flex;
+  //background: orange;
+`
+
+const LikeBtn = styled.button`
+  width: 120px;
+  height: 30px;
+  background: #33333e;
+  color: white;
+  margin-right: 12px;
+  border-radius: 5px;
+  border: none;
+  font-size: 15px;
   
+`
+
+const WatchLateBtn= styled.button`
+  width: 120px;
+  height: 30px;
+  background: #33333e;
+  color: white;
+  margin-right: 12px;
+  border-radius: 5px;
+  border: none;
+  font-size: 15px;
 `
 
 const HeaderWrapper = styled.div`
@@ -189,56 +231,69 @@ const FilmPageInfo = ({movie}) => {
     }
 
     return (
+
+
         <PageWrapper>
-            <HeaderWrapper>
-                <Navigation/>
-                <HeaderImg src={HeaderImgPost}/>
-            </HeaderWrapper>
 
-            <FilmInfoWrapper>
-                <ImageWrapper>
-                    <Image src={movie.image}/>
+            <Navigation/>
 
-                    {isAuthorized &&
-                    <UserBtnWrapper>
-                        <button
-                            onClick={() => dispatch(likedFilm(movie.id))}>{movie.isLiked ? 'Liked' : 'like'}</button>
 
-                        <button
-                            onClick={() => dispatch(watchLateFilm(movie.id))}>{movie.isWatchLate ? 'Watched late' : 'Watch late'}</button>
-                    </UserBtnWrapper>
+            <HeaderFilmInfo>
+                <FilmInfoWrapper>
+                    <ImageWrapper>
+                        <Image src={movie.image}/>
+
+                    </ImageWrapper>
+
+                    <FilmInfo>
+                        <MovieName>{movie.name}</MovieName>
+                        <MovieYear>Year of release: {movie.year}</MovieYear>
+                        <MovieGenre>Genre: {movie.genre}</MovieGenre>
+                        <MovieDirected>Directed by: {movie.director}</MovieDirected>
+
+                        {isAuthorized &&
+                        <UserBtnWrapper>
+
+                            <LikeBtn
+                                onClick={() => dispatch(likedFilm(movie.id))}>{movie.isLiked ? 'Liked' : 'Like'}
+                            </LikeBtn>
+
+                            <WatchLateBtn
+                                onClick={() => dispatch(watchLateFilm(movie.id))}>{movie.isWatchLate ? 'Watched late' : 'Watch late'}
+                            </WatchLateBtn>
+                        </UserBtnWrapper>
+                        }
+
+                    </FilmInfo>
+
+
+
+
+                    {isAdmin &&
+                    <ButtonsWrapper>
+                        <EditBtnWrapper>
+                            <BtnWrapper>
+                                <img
+                                    src={editImg}
+                                    alt='editBtn'
+                                    onClick={() => setEditModalActive(true)}
+                                />
+                            </BtnWrapper>
+                        </EditBtnWrapper>
+
+                        <DeleteBtnWrapper>
+                            <Link to={PATHS.MAIN} onClick={() => dispatch(removeMovie(movie.id))}>
+                                <img title='delete film' src={deleteImg}/>
+                            </Link>
+                        </DeleteBtnWrapper>
+
+                    </ButtonsWrapper>
                     }
-                </ImageWrapper>
 
-                <FilmInfo>
-                    <MovieName>{movie.name}</MovieName>
-                    <MovieYear>Year of release: {movie.year}</MovieYear>
-                    <MovieGenre>Genre: {movie.genre}</MovieGenre>
-                    <MovieDirected>Directed by: {movie.director}</MovieDirected>
-                </FilmInfo>
+                </FilmInfoWrapper>
+            </HeaderFilmInfo>
 
-                {isAdmin &&
-                <ButtonsWrapper>
-                    <EditBtnWrapper>
-                        <BtnWrapper>
-                            <img
-                                src={editImg}
-                                alt='editBtn'
-                                onClick={() => setEditModalActive(true)}
-                            />
-                        </BtnWrapper>
-                    </EditBtnWrapper>
 
-                    <DeleteBtnWrapper>
-                        <Link to={PATHS.MAIN} onClick={() => dispatch(removeMovie(movie.id))}>
-                            <img title='delete film' src={deleteImg}/>
-                        </Link>
-                    </DeleteBtnWrapper>
-
-                </ButtonsWrapper>
-                }
-
-            </FilmInfoWrapper>
             <MovieDescription>{movie.description}</MovieDescription>
 
             <MovieVideo>

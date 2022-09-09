@@ -11,7 +11,9 @@ import ImageSlider from "../../components/ImageSlider";
 import Post from "../../components/Post";
 import ModalWindow from "../../components/ModalWindow";
 // @ts-ignore
-import HeaderImgPost from "../../img/interstellar-movie-movies-astronaut-sea-wallpaper-preview.jpg"
+
+// top
+// import HeaderImgPost from "../../img/interstellar-movie-movies-astronaut-sea-wallpaper-preview.jpg"
 
 
 const Wrapper = styled.div`
@@ -19,6 +21,8 @@ const Wrapper = styled.div`
   background: #1f1e1e;
   box-sizing: border-box;
   padding-bottom: 50px;
+  min-width: 1200px;
+
 
 
   & div {
@@ -46,6 +50,7 @@ const HeaderWrapper = styled.div`
   color: white;
 `
 
+// top
 const HeaderImg = styled.img`
   width: 100%;
   height: 100%;
@@ -56,11 +61,11 @@ const HeaderImg = styled.img`
 const HeaderLink = styled.div`
   width: 100%;
   height: 40px;
-  margin-top: 15px;
+  //margin-top: 15px;
   position: absolute;
   top: 0;
-  padding-right: 50px;
-  padding-left: 50px;
+  //padding-right: 50px;
+  //padding-left: 50px;
   box-sizing: border-box;
   //display: flex;
 
@@ -69,9 +74,9 @@ const HeaderLink = styled.div`
 const FilmsWrapper = styled.div`
   //background: green;
   width: 90%;
-  max-width: 1000px;
+  min-width: 1200px;
   margin: auto;
-  min-width: 800px;
+  //min-width: 800px;
   padding-top: 50px;
 `
 
@@ -96,7 +101,10 @@ const Main = () => {
     return (
         <Wrapper>
             <HeaderWrapper>
-                <HeaderImg src={HeaderImgPost}/>
+
+                {/*top*/}
+                {/*<HeaderImg src={HeaderImgPost}/>*/}
+
                 <HeaderLink>
                     <PageHeader setAddModalActive={setAddModalActive} handleCategoryChange={handleCategoryChange}/>
 
