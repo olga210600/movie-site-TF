@@ -1,6 +1,8 @@
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
 import {Formik, Field, Form} from "formik";
 import {validateSchema} from "./schema";
+// import {Link as RouterLink} from "react-router-dom";
+
 import {
     Wrapper,
     FormField,
@@ -10,15 +12,26 @@ import {
     MainPageLinkWrapper,
     LabelWrapper,
     StarPassword,
-    StarEmail
+    StarEmail,
+    LogInWrapper
 } from "./styles";
 import {IMovie} from "../../store/reducers/moviesReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {userLogIn, adminLogIn} from "../../store/reducers/moviesReducer"
 import {Link, PATHS} from '../../components/RouterNavigation'
 import {createBrowserHistory} from "history";
+import isEmpty from "lodash/isEmpty";
+
+
+//
+// export const Link = styled(RouterLink)`
+//
+//  `
 
 const EssentialForm = () => {
+
+
+
     const history = createBrowserHistory();
     const currentPage = history.location.pathname;
     const isAuthorized: IMovie[] = useSelector((state: any) => state.moviesList.isAuthorized)
@@ -54,14 +67,14 @@ const EssentialForm = () => {
                 validationSchema={validateSchema}
                 validateOnMount
             >
-                {({values, errors}) => {
+                {({values, errors, touched}) => {
 
                     return (
                         <Form>
 
                             <PageHeader>Registration</PageHeader>
 
-                            <FormField isError={errors?.email}>
+                            <FormField isError={errors?.email && touched.email}>
                                 <LabelWrapper>
                                    <label htmlFor="email">Email</label>
                                     <StarEmail>*</StarEmail>
@@ -74,10 +87,10 @@ const EssentialForm = () => {
                                     type="email"
                                 />
 
-                                {errors?.email && <ErrorMessage>{errors?.email}</ErrorMessage>}
+                                {errors?.email && touched.email && <ErrorMessage>{errors?.email }</ErrorMessage>}
                             </FormField>
 
-                            <FormField isError={errors?.password}>
+                            <FormField isError={errors?.password && touched.password}>
                                 <LabelWrapper>
                                     <label htmlFor="password"> Password</label>
                                     <StarPassword>*</StarPassword>
@@ -87,7 +100,7 @@ const EssentialForm = () => {
 
                                 />
 
-                                {errors?.password && (
+                                {errors?.password && touched.password && (
                                     <ErrorMessage>{errors?.password}</ErrorMessage>
                                 )}
                             </FormField>
@@ -96,13 +109,14 @@ const EssentialForm = () => {
                                 errors?.email || errors?.password ?
                                     <CompleteWrapper>Complete all fields</CompleteWrapper> :
 
-                                    <div>
+                                    <LogInWrapper>
                                         <Link isActive={currentPage === PATHS.MAIN} to={PATHS.MAIN}
                                               onClick={() => getUser(values)}
+                                              // disabled={!isEmpty(errors) }
                                         >
                                             Log in
                                         </Link>
-                                    </div>
+                                    </LogInWrapper>
                             }
 
                         </Form>

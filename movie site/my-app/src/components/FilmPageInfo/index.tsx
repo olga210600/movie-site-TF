@@ -124,13 +124,14 @@ const DeleteBtnWrapper = styled.div`
   color: white;
   width: 40px;
   height: 40px;
-  background: red;
+  //background: red;
   border: none;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 10px;
+  margin-top: 2px;
 `
 
 export const Link = styled(RouterLink)`
@@ -145,7 +146,7 @@ const BtnWrapper = styled.div`
 const EditBtnWrapper = styled.div`
   width: 40px;
   height: 40px;
-  background: #598d19;
+  //background: #598d19;
   border-radius: 50%;
   display: flex;
   justify-content: center;

@@ -18,7 +18,7 @@ const PostWrapper = styled.div`
   width: 200px;
   height: 440px;
   margin: 20px;
-  cursor: pointer;
+  //cursor: pointer;
   border-radius: 5px;
   position: relative;
 

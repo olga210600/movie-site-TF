@@ -12,8 +12,7 @@ import Post from "../../components/Post";
 import ModalWindow from "../../components/ModalWindow";
 // @ts-ignore
 
-// top
-// import HeaderImgPost from "../../img/interstellar-movie-movies-astronaut-sea-wallpaper-preview.jpg"
+
 
 
 const Wrapper = styled.div`
@@ -36,10 +35,6 @@ const Wrapper = styled.div`
   ul {
     display: flex;
     justify-content: center;
- 
-
-
-    
   }
   
   
@@ -62,22 +57,16 @@ const HeaderImg = styled.img`
 const HeaderLink = styled.div`
   width: 100%;
   height: 40px;
-  //margin-top: 15px;
   position: absolute;
   top: 0;
-  //padding-right: 50px;
-  //padding-left: 50px;
   box-sizing: border-box;
-  //display: flex;
 
 `
 
 const FilmsWrapper = styled.div`
-  //background: green;
   width: 90%;
   max-width: 1200px;
-  margin: auto;
-  //min-width: 800px;
+  margin: -200px auto 0;
   padding-top: 50px;
 `
 

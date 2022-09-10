@@ -7,11 +7,10 @@ import Navigation from "../PageHeader";
 import styled from 'styled-components'
 
 const PageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  //background: red;
-  //width: 100vw;
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+  
 `
 
 const FilmPage = (props) => {

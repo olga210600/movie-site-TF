@@ -17,12 +17,7 @@ export const Wrapper = styled.div`
   display: flex;
 min-width: 1200px;
   position: relative;
-  //margin:auto ;
-  //width: 100%;
-  ////height: 50px;
-  //height: 380px;
-  ////background: rebeccapurple;
-  ////justify-content: space-between;
+  
 
 
   & nav {
@@ -105,6 +100,7 @@ export const Link = styled(RouterLink)`
     text-decoration: ${({isActive}) => (isActive ? "underline red" : "none")};
     color: ${({isActive}) => (isActive ? "white" : "white")};
     margin-right: 15px;
+    
 
     ///////
     padding: 5px;

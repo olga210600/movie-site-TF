@@ -14,8 +14,9 @@ export const Wrapper = styled.div`
     //justify-content: center;
     align-items: center;
     background: #404040;
-    width: 500px;
-    height: 420px;
+    width: 450px;
+    height: 405px;
+    padding-top: 5px;
     margin-top: 100px;
     flex-direction: column;
     border-radius: 5px;
@@ -126,18 +127,37 @@ export const CodeWrapper = styled.div`
 export const ErrorMessage = styled.span`
   font-size: 11px;
   color: red;
-  font-weight: 600;
+  //font-weight: 600;
   position: absolute;
   top: 64px;
 `;
 
+
+
 export const CompleteWrapper = styled.div`
-  margin: 10px 0 10px 0;
-  font-size: 18px;
+  margin: 13px 0 10px 0;
+  font-size: 17px;
   color: red;
-  font-weight: bold;
+  //font-weight: bold;
   
 
+`
+
+export const LogInWrapper = styled.div`
+  
+  width: 294px;
+  //background: rebeccapurple;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  
+ && a {
+   //padding: 10px;
+   
+ }
+  
+  
+ 
 `
 
  export const MainPageLinkWrapper = styled.div`
@@ -149,3 +169,4 @@ export const CompleteWrapper = styled.div`
    font-size: 18px;
    
 `
+
