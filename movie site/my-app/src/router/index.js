@@ -9,18 +9,35 @@ import LikedFilmPage from "../pages/LikedFilmPage";
 import WatchLateFilmPage from "../pages/WatchLateFilmPage";
 import Navigation from "../components/RouterNavigation";
 
-const mockedOptions = {
-    roles: [
-        { value: "admin", label: "Admin role" },
-        { value: "user", label: "User role" },
-    ],
-};
+export const mockedOptions =[
+    { value: "unselected", label: "Select genre" },
+    { value: "actionMovie", label: "action" },
+    { value: "adventureMovie", label: "Adventure film" },
+    { value: "comedy movie", label: "comedy" },
+    { value: "drama", label: "Drama" },
+    { value: "fantasy movie", label: "Fantasy movie" },
+    { value: "historical movie", label: "Historical movie" },
+    { value: "horror movie", label: "Horror movie" },
+    { value: "cartoons", label: "Cartoons" },
+
+]
+
+
+// export const mockedOptions = [
+//     genres: [
+//         { value: "unselected", label: "Select genre" },
+//         { value: "action movie", label: "action" },
+//         { value: "comedy", label: "comedy" },
+//     ],
+// ];
 
 const mockedData = {
-    userName: "",
-    role: "user",
-    email: "my-email@example.com",
-    password: "",
+//     userName: "",
+//     role: "user",
+//     email: "my-email@example.com",
+//     password: "",
+
+    genres: 'unselected'
 
 };
 
@@ -39,7 +56,7 @@ const PublicRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route exact path="/" element={withNavigation(Main)} />
+                <Route exact path="/" element={withNavigation(Main , mockedData, mockedOptions)} />
                 <Route path="/movie-details" element={withNavigation(FilmPage)} />
                 <Route path="/registration-form" element={withNavigation(Registration, mockedData, mockedOptions)} />
                 <Route path="/liked-movies" element={withNavigation(LikedFilmPage)} />

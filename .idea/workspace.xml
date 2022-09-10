@@ -29,7 +29,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Сережа урок по формику и роутеры/formik-example" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -101,7 +101,8 @@
       <workItem from="1662653720824" duration="22784000" />
       <workItem from="1662719950110" duration="9514000" />
       <workItem from="1662754393702" duration="5468000" />
-      <workItem from="1662762924493" duration="3097000" />
+      <workItem from="1662762924493" duration="3203000" />
+      <workItem from="1662826009428" duration="14489000" />
     </task>
     <servers />
   </component>

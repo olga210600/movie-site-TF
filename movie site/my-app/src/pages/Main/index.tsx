@@ -71,7 +71,7 @@ const FilmsWrapper = styled.div`
 `
 
 
-const Main = () => {
+const Main = ({data, options}) => {
     const movies: IMovie[] = useSelector((state: any) => state.moviesList.defaultData)
     const filteredList: IMovie[] = useSelector((state: any) => state.moviesList.filteredMovies)
     const dispatch = useDispatch()
@@ -101,6 +101,7 @@ const Main = () => {
                     {
                         addModalActive &&
                         <ModalWindow
+                            options={options}
                             currentButton='Add'
                             currentFunction={currentFunction}
                             date={movies} handleClose={() => setAddModalActive(false)}
@@ -118,7 +119,7 @@ const Main = () => {
             <FilmsWrapper>
                 <PaginationList
                     data={filteredList}
-                    pageSize={9}
+                    pageSize={8}
                     layout={"row"}
                     renderItem={(item, key) => (
                         <Post filmId={item.id} key={key} movie={item}/>

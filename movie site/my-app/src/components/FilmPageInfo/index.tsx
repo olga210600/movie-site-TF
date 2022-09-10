@@ -20,6 +20,7 @@ import editImg from '../../img/edit-svgrepo-com.svg'
 // @ts-ignore
 import HeaderImgPost from "../../img/interstellar-movie-movies-astronaut-sea-wallpaper-preview.jpg";
 import PageHeader from "../PageHeader";
+import {mockedOptions} from "../../router";
 
 
 const PageWrapper = styled.div`
@@ -295,6 +296,7 @@ const FilmPageInfo = ({movie}) => {
             {
                 editModalActive &&
                 <ModalWindow
+                    options={mockedOptions}
                     currentButton='Edit'
                     currentFunction={currentFunction}
                     date={movie}

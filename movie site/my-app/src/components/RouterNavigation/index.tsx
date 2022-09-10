@@ -287,6 +287,12 @@ const Navigation = ({setAddModalActive, handleCategoryChange}: any) => {
                                 <option value="">All genres of films</option>
                                 <option value="action movie">Action movie</option>
                                 <option value="comedy">Comedy</option>
+                                <option value="adventure movie">Adventure movie</option>
+                                <option value="drama">Drama</option>
+                                <option value="fantasy movie">Fantasy movie</option>
+                                <option value="historical movie">Historical movie</option>
+                                <option value="horror movie">Horror movie</option>
+                                <option value="cartoons">Cartoons</option>
                             </select>
 
                         </SelectWrapper>
