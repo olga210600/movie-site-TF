@@ -18,7 +18,8 @@ import {
 import {IMovie} from "../../store/reducers/moviesReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {userLogIn, adminLogIn} from "../../store/reducers/moviesReducer"
-import {Link, PATHS} from '../../components/RouterNavigation'
+import {Link, } from '../../components/RouterNavigation/style'
+import { PATHS} from '../../components/RouterNavigation'
 import {createBrowserHistory} from "history";
 import isEmpty from "lodash/isEmpty";
 
