@@ -14,11 +14,11 @@ const validateMessages = {
         min: "Movie year cannot be less than 2 characters",
         max: "Movie year cannot be longer than 4 characters",
     },
-    genre: {
-        required: "Movie genre cannot be empty",
-        min: "Movie genre cannot be less than 2 characters",
-        max: "Movie genre cannot be longer than 40 characters",
-    },
+    // genre: {
+    //     required: "Movie genre cannot be empty",
+    //     min: "Movie genre cannot be less than 2 characters",
+    //     max: "Movie genre cannot be longer than 40 characters",
+    // },
     description: {
         required: "Movie description cannot be empty",
         min: "Movie description cannot be less than 2 characters",
@@ -44,9 +44,9 @@ export const validateSchema = Yup.object().shape({
         .required(validateMessages.year.required)
         .min(4, validateMessages.year.min)
         .max(4, validateMessages.year.max),
-    genre: Yup.string()
-        .required(validateMessages.genre.required)
-        .min(4, validateMessages.genre.min),
+    // genre: Yup.string()
+    //     .required(validateMessages.genre.required)
+    //     .min(4, validateMessages.genre.min),
     description: Yup.string()
         .required(validateMessages.description.required)
         .min(4, validateMessages.description.min),

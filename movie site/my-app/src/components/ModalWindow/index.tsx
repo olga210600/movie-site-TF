@@ -1,182 +1,20 @@
-import React, {useMemo} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import styled from 'styled-components'
 import {Formik, Field, Form} from "formik";
 import {validateSchema} from "./schema";
-import {useDispatch} from "react-redux";
 import {v4 as uuidv4} from 'uuid';
-
-const Modal = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.4);
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-`
-
-
-//${({isActive}) => isActive && `
-//  display: flex;
-// align-items: center;
-// justify-content: center;
-// `}
-
-// analog
-//transform: ${({isActive}) => isActive ? 'scale(1)' : 'scale(0)'};
-
-//background: ${({isActive}) => isActive ? 'red' : 'green'};
-
-
-//   ${({isActive}) => isActive ? `
-//   transform: scale(1);
-// ` : `
-// transform: scale(0);
-// `}
-
-
-const ModalContent = styled.div`
-  padding: 40px 30px 30px 30px;
-  border-radius: 12px;
-  background-color: #eeebeb;
-  width: 500px;
-  //height: 410px;
-  height: 550px;
-  position: relative;
-  //padding-top: 40px;
-`
-
-const Header = styled.h1`
-  width: 400px;
-  margin: 0 auto 30px;
-`
-
-
-const CloseBtn = styled.button`
-  background: red;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50px;
-  position: absolute;
-  color: white;
-  font-size: 15px;
-  top: 10px;
-  right: 10px;
-`
-
-const FormNameElement = styled.div`
-  //background: orange;
-
-  input {
-    width: 65%;
-    height: 30px;
-    border-radius: 4px;
-    margin-left: 45px;
-    margin-bottom: 10px;
-  }
-   &input {
-
-   ${({ isError }) =>
-          isError
-                  ? `
-    color:  red;
-    `
-                  : `
-        border: 2px solid gray;
-    `}
-}
-`
-const FormImageElement = styled.div`
-  //background: orange;
-
-  input {
-    width: 65%;
-    height: 30px;
-    border-radius: 4px;
-    margin-left: 46px;
-    margin-bottom: 10px;
-  }
-`
-const FormYearElement = styled.div`
-  //background: orange;
-
-  input {
-    width: 65%;
-    height: 30px;
-    border-radius: 4px;
-    margin-left: 60px;
-    margin-bottom: 10px;
-  }
-`
-const FormGenreElement = styled.div`
-  //background: orange;
-
-  input {
-    width: 65%;
-    height: 30px;
-    border-radius: 4px;
-    margin-left: 50px;
-    margin-bottom: 10px;
-  }
-`
-const FormDescriptionElement = styled.div`
-  //background: orange;
-
-  input {
-    width: 65%;
-    height: 30px;
-    border-radius: 4px;
-    margin-left: 8px;
-    margin-bottom: 10px;
-  }
-`
-const FormDirectorElement = styled.div`
-  //background: orange;
-
-  input {
-    width: 65%;
-    height: 30px;
-    border-radius: 4px;
-    margin-left: 34px;
-    margin-bottom: 10px;
-  }
-`
-const FormVideoElement = styled.div`
-  //background: orange;
-
-  input {
-    width: 65%;
-    height: 30px;
-    border-radius: 4px;
-    margin-left: 53px;
-    margin-bottom: 10px;
-  }
-`
-
-const CurrentBtnWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 555px;
-  left: 5px;
-`
-
-const CurrentBtn = styled.button`
-  width: 100px;
-  height: 40px;
-  color: white;
-  border: none;
-  font-size: 19px;
-  background: #5dba52;
-  border-radius: 5px;
-
-`
+import isEmpty from 'lodash/isEmpty'
+import {
+    Select,
+    CurrentBtnWrapper,
+    CloseBtn,
+    ModalContent,
+    Modal,
+    Header,
+    CurrentBtn,
+    ErrorMessage,
+    FormField
+} from './style'
 
 const getInitialValues = (data) => ({
     name: data?.name ?? "",
@@ -189,10 +27,34 @@ const getInitialValues = (data) => ({
     id: data?.id ?? uuidv4(),
 });
 
-const ModalWindow = ({date, currentFunction, currentButton, handleClose}) => {
-    const initialValues = useMemo(() => getInitialValues(date), [date]);
-    // const dispatch = useDispatch()
 
+// @ts-ignore
+// @ts-ignore
+const SelectComponent = ({options, value, field: {name}, form: {setFieldValue, values}}) => {
+    const handleChange = useCallback((e) => {
+        console.log('e.target.value: ', e.target.value)
+        if (e.target.value) {
+            setFieldValue(name, e.target.value)
+        }
+    }, [name, setFieldValue])
+
+    return (
+
+        <Select onChange={handleChange}>
+
+            {
+                options.map((option) => (
+
+                    <option value={option.value} selected={value === option.value}>{option.label}</option>
+                ))
+            }
+
+        </Select>
+    )
+}
+
+const ModalWindow = ({date, options, currentFunction, currentButton, handleClose}) => {
+    const initialValues = useMemo(() => getInitialValues(date), [date]);
 
     // @ts-ignore
     return (
@@ -209,106 +71,112 @@ const ModalWindow = ({date, currentFunction, currentButton, handleClose}) => {
                         validationSchema={validateSchema}
                         validateOnMount
                     >
-                        {({values, errors}) => {
+                        {({values, errors, touched}) => {
                             // @ts-ignore
                             // @ts-ignore
                             // @ts-ignore
+
+                            console.log('values', values)
                             return (
                                 <Form>
                                     <Header>Fill in the movie fields</Header>
 
-                                    <FormNameElement>
+                                    <FormField isError={errors?.name && touched.name}>
                                         <label htmlFor="name">Movie name: </label>
                                         <Field id="name" name="name" placeholder="name"/>
 
-                                        {errors?.name && (
-                                            <div>{errors?.name}</div>
+                                        {errors?.name && touched.name && (
+                                            <ErrorMessage>{errors?.name}</ErrorMessage>
                                         )}
-                                    </FormNameElement>
+                                    </FormField>
 
-                                    <FormImageElement>
+                                    <FormField isError={errors?.image && touched.image}>
                                         <label htmlFor="image"> Movie image:</label>
                                         <Field id="image" name="image" placeholder="image"/>
 
-                                        {errors?.image && (
-                                            <div>{errors?.image}</div>
+                                        {errors?.image && touched.image && (
+                                            <ErrorMessage>{errors?.image}</ErrorMessage>
                                         )}
-                                    </FormImageElement>
+                                    </FormField>
 
-                                    <FormYearElement>
+                                    <FormField isError={errors?.year && touched.year}>
                                         <label htmlFor="year">Movie year:</label>
                                         <Field id="year" name="year" placeholder="year"/>
 
-                                        {errors?.year && (
-                                            <div>{errors?.year}</div>
+                                        {errors?.year && touched.year && (
+                                            <ErrorMessage>{errors?.year}</ErrorMessage>
                                         )}
-                                    </FormYearElement>
+                                    </FormField>
 
-                                    <FormGenreElement>
-                                        <label htmlFor="genre">Movie genre:</label>
-                                        <Field id="genre" name="genre" placeholder="genre"/>
+                                    <FormField isError={errors?.genre && touched.genre}>
+                                        <label htmlFor="genre">Genre</label>
+                                        <Field
+                                            id="genre"
+                                            name="genre"
+                                            value={values?.genre}
+                                            options={options}
+                                            component={SelectComponent}
+                                        />
 
-                                        {errors?.genre && (
-                                            <div>{errors?.genre}</div>
+                                        {errors?.genre && touched.geanre && (
+                                            <ErrorMessage>{errors?.genre}</ErrorMessage>
                                         )}
-                                    </FormGenreElement>
+                                    </FormField>
 
-                                    <FormDescriptionElement>
+                                    <FormField isError={errors?.description && touched.description}>
                                         <label htmlFor="description">Movie description:</label>
                                         <Field id="description" name="description"
                                                placeholder="description"/>
 
-                                        {errors?.description && (
-                                            <div>{errors?.description}</div>
+                                        {errors?.description && touched.description && (
+                                            <ErrorMessage>{errors?.description}</ErrorMessage>
                                         )}
-                                    </FormDescriptionElement>
+                                    </FormField>
 
-                                    <FormDirectorElement>
+                                    <FormField isError={errors?.director && touched.director}>
                                         <label htmlFor="director"> Movie director:</label>
                                         <Field id="director" name="director" placeholder="director"/>
 
-                                        {errors?.director && (
-                                            <div>{errors?.director}</div>
+                                        {errors?.director && touched.director && (
+                                            <ErrorMessage>{errors?.director}</ErrorMessage>
                                         )}
-                                    </FormDirectorElement>
+                                    </FormField>
 
-                                    <FormVideoElement>
+                                    <FormField isError={errors?.video && touched.video}>
                                         <label htmlFor="video"> Movie video:</label>
                                         <Field id="video" name="video" placeholder="video"/>
 
-                                        {errors?.video && (
-                                            <div>{errors?.video}</div>
+                                        {errors?.video && touched.video && (
+                                            <ErrorMessage>{errors?.video}</ErrorMessage>
                                         )}
-                                    </FormVideoElement>
+                                    </FormField>
 
 
                                     <CurrentBtnWrapper>
-                                        <CurrentBtn
-                                            onClick={() => {
-                                                handleClose()
-                                                currentFunction(values)
-                                            }}>
+                                        <CurrentBtn type="submit"
+                                                    disabled={!isEmpty(errors)}
+                                                    onClick={() => {
+                                                        handleClose()
+                                                        currentFunction(values)
+
+                                                    }}>
                                             {currentButton}
                                         </CurrentBtn>
                                     </CurrentBtnWrapper>
 
-
-                                    {/*<CloseBtnWrapper>*/}
                                     <CloseBtn onClick={() => {
                                         handleClose()
                                     }}>
                                         &#10006;
                                     </CloseBtn>
-                                    {/*</CloseBtnWrapper>*/}
-
                                 </Form>
                             );
                         }}
-                            </Formik>
-                            </div>
-                            </ModalContent>
-                            </Modal>
-                            );
-                        };
+                    </Formik>
+                </div>
+            </ModalContent>
+        </Modal>
+    );
+};
 
 export default ModalWindow;

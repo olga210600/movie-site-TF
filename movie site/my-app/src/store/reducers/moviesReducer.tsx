@@ -60,7 +60,7 @@ const moviesSlice = createSlice({
                 isAdmin: true,
             }
         },
-        logOut(state, action) {
+        logOut(state) {
 
             const copiedDefaultData = cloneDeep(state.defaultData)
             const copiedFilteredMovies = cloneDeep(state.filteredMovies)
@@ -88,6 +88,7 @@ const moviesSlice = createSlice({
             }
         },
         addNewMovie(state, action):any {
+            console.log('action.payload add',action.payload)
             const newFilm = {
                 // id: uuidv4(),
                 // image: action.payload.image,

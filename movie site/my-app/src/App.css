@@ -1,17 +1,11 @@
 
 *{
-    font-family: Verdana, sans-serif;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
 }
 .App {
-    /*!*background-image: url("img/Avengers_Endgame_Banner.webp");*!*/
-    /*width: 100vw;*/
-    height: 100%;
-    background-image: url("img/fern-leaves-on-dark-background-in-jungle-dense-dark-green-fern-leaves-in-garden-at-night-nature-abstract-background-fern-at-tropical-forest-exotic-plant_33867-774.jpg");
-    /*background: black;*/
-    width: 100%;
-    margin: 0 ;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+    height: 100vh;
+    background-color: #2b2a2a;
 }

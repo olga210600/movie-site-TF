@@ -10,37 +10,72 @@ import {selectedFilms} from '../../store/reducers/moviesReducer'
 import ImageSlider from "../../components/ImageSlider";
 import Post from "../../components/Post";
 import ModalWindow from "../../components/ModalWindow";
+// @ts-ignore
+
+
 
 
 const Wrapper = styled.div`
-  width: 63%;
-  min-width: 750px;
-  margin: 70px auto;
+
+  //background: #1f1e1e;
   background: #2b2a2a;
   box-sizing: border-box;
-  //padding-top: 0;
+  padding-bottom: 50px;
+  min-width: 1200px;
+
+
 
   & div {
     & div {
       flex-wrap: wrap;
-      // срабатівает в навигации margin: 20px;
       justify-content: center;
-      //margin: auto;
     }
   }
-  
+
   ul {
     display: flex;
     justify-content: center;
   }
+  
+  
+`
+
+const HeaderWrapper = styled.div`
+  height: 380px;
+  position: relative;
+  color: white;
+`
+
+// top
+const HeaderImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+`
+
+const HeaderLink = styled.div`
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  box-sizing: border-box;
+
+`
+
+const FilmsWrapper = styled.div`
+  width: 90%;
+  max-width: 1200px;
+  margin: -200px auto 0;
+  padding-top: 50px;
 `
 
 
-const Main = () => {
+const Main = ({data, options}) => {
     const movies: IMovie[] = useSelector((state: any) => state.moviesList.defaultData)
     const filteredList: IMovie[] = useSelector((state: any) => state.moviesList.filteredMovies)
     const dispatch = useDispatch()
-    const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
+    // const isAdmin: IMovie[] = useSelector((state: any) => state.moviesList.isAdmin)
     const [addModalActive, setAddModalActive] = useState(false)
 
 
@@ -50,36 +85,48 @@ const Main = () => {
     }
 
     const currentFunction = (values) => {
-        //разкоментировать!!!!!!!
-        // dispatch(editMovie(value))
         dispatch(addNewMovie(values))
     }
 
     return (
         <Wrapper>
-            <PageHeader setAddModalActive={setAddModalActive} handleCategoryChange={handleCategoryChange}/>
+            <HeaderWrapper>
 
-            {
-                addModalActive &&
-                <ModalWindow
-                    currentButton='Add'
+                {/*top*/}
+                {/*<HeaderImg src={HeaderImgPost}/>*/}
+
+                <HeaderLink>
+                    <PageHeader setAddModalActive={setAddModalActive} handleCategoryChange={handleCategoryChange}/>
+
+                    {
+                        addModalActive &&
+                        <ModalWindow
+                            options={options}
+                            currentButton='Add'
+                            currentFunction={currentFunction}
+                            date={movies} handleClose={() => setAddModalActive(false)}
+                        />
+                    }
+                </HeaderLink>
+
+            </HeaderWrapper>
 
 
-                    // currentFunction={addNewMovie}
-                    currentFunction={currentFunction}
-                    date={movies} handleClose={() => setAddModalActive(false)}
+            {/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!слфйдер*/}
+            {/*<ImageSlider movies={movies}/>*/}
+            {/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/}
+
+            <FilmsWrapper>
+                <PaginationList
+                    data={filteredList}
+                    pageSize={8}
+                    layout={"row"}
+                    renderItem={(item, key) => (
+                        <Post filmId={item.id} key={key} movie={item}/>
+                    )}
                 />
-            }
-            <ImageSlider movies={movies}/>
+            </FilmsWrapper>
 
-            <PaginationList
-                data={filteredList}
-                pageSize={9}
-                layout={"row"}
-                renderItem={(item, key) => (
-                    <Post filmId={item.id} key={key} movie={item}/>
-                )}
-            />
         </Wrapper>
     );
 };
